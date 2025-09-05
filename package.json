@@ -1,0 +1,27 @@
+{
+  "name": "lean-prompt-garden",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snap": "node scripts/snap.mjs",
+    "build": "node scripts/build.mjs",
+    "serve": "npx http-server docs -p 8080 -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eferro/lean-prompt-garden.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/eferro/lean-prompt-garden/issues"
+  },
+  "homepage": "https://github.com/eferro/lean-prompt-garden#readme",
+  "devDependencies": {
+    "playwright": "^1.55.0"
+  }
+}

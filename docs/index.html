@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lean Prompt Garden</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <h1>Lean Prompt Garden</h1>
+      <div class="search-box">
+        <input id="searchInput" type="search" placeholder="Buscar por título o descripción…" aria-label="Buscar prompts">
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="listSection">
+      <div id="cards" class="cards"></div>
+      <div id="emptyState" class="empty-state" hidden>
+        No se han encontrado prompts para tu búsqueda.
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Fuente de datos: <code>prompts.mcp.json</code> generado a partir de <code>prompts.json</code>.</p>
+      <p>Inspirado por <a href="https://www.rebiun.org/observatorio-de-inteligencia-artificial/prompts" target="_blank" rel="noopener">REBIUN – Prompts</a>.</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    const state = {
+      prompts: [],
+      filtered: []
+    };
+
+    const el = (sel) => document.querySelector(sel);
+    const cardsEl = el('#cards');
+    const emptyEl = el('#emptyState');
+    const searchInput = el('#searchInput');
+
+    function escapeHtml(str) {
+      return (str || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard?.writeText) {
+        return navigator.clipboard.writeText(text);
+      }
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      return Promise.resolve();
+    }
+
+    function templateVariables(prompt) {
+      const required = prompt?.input_schema?.required || [];
+      return required;
+    }
+
+    function render(prompts) {
+      cardsEl.innerHTML = '';
+      if (!prompts.length) {
+        emptyEl.hidden = false;
+        return;
+      }
+      emptyEl.hidden = true;
+
+      for (const p of prompts) {
+        const card = document.createElement('article');
+        card.className = 'card';
+
+        const heading = document.createElement('div');
+        heading.className = 'card-header';
+        heading.innerHTML = `
+          <h2 class="card-title">${escapeHtml(p.title || p.name)}</h2>
+          <div class="card-subtitle">${escapeHtml(p.description || '')}</div>
+        `;
+
+        const vars = templateVariables(p);
+        const varsHtml = vars.length
+          ? `<ul class="vars">${vars.map(v => `<li><code>{{${v}}}</code></li>`).join('')}</ul>`
+          : '<span class="muted">Sin variables</span>';
+
+        const actions = document.createElement('div');
+        actions.className = 'card-actions';
+        actions.innerHTML = `
+          <button class="btn btn-secondary" data-action="copy">Copiar plantilla</button>
+          <details class="template-details">
+            <summary>Ver plantilla</summary>
+            <pre class="template"><code>${escapeHtml(p.template)}</code></pre>
+          </details>
+        `;
+
+        const meta = document.createElement('div');
+        meta.className = 'card-meta';
+        meta.innerHTML = `
+          <div>
+            <span class="meta-label">Nombre</span>
+            <code>${escapeHtml(p.name)}</code>
+          </div>
+          <div>
+            <span class="meta-label">Variables</span>
+            ${varsHtml}
+          </div>
+        `;
+
+        actions.querySelector('[data-action="copy"]').addEventListener('click', async () => {
+          await copyToClipboard(p.template || '');
+          const btn = actions.querySelector('[data-action="copy"]');
+          const prev = btn.textContent;
+          btn.textContent = 'Copiado';
+          setTimeout(() => (btn.textContent = prev), 1200);
+        });
+
+        card.appendChild(heading);
+        card.appendChild(meta);
+        card.appendChild(actions);
+        cardsEl.appendChild(card);
+      }
+    }
+
+    function applyFilter() {
+      const q = (searchInput.value || '').toLowerCase().trim();
+      if (!q) {
+        state.filtered = state.prompts;
+      } else {
+        state.filtered = state.prompts.filter(p =>
+          (p.title || '').toLowerCase().includes(q) ||
+          (p.description || '').toLowerCase().includes(q) ||
+          (p.name || '').toLowerCase().includes(q)
+        );
+      }
+      render(state.filtered);
+    }
+
+    async function load() {
+      try {
+        const res = await fetch('prompts.mcp.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error(String(res.status));
+        const data = await res.json();
+        state.prompts = data?.prompts || [];
+        state.filtered = state.prompts;
+        render(state.filtered);
+      } catch (err) {
+        console.error('No se pudo cargar prompts.mcp.json', err);
+        emptyEl.hidden = false;
+        emptyEl.textContent = 'Error cargando el catálogo.';
+      }
+    }
+
+    searchInput.addEventListener('input', applyFilter);
+    await load();
+  </script>
+</body>
+</html>
+
+
+
