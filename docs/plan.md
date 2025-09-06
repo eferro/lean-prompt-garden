@@ -13,12 +13,12 @@
 ### Component Tests (High Priority)
 - ✅ PromptCard component tests - should display prompt information correctly
 - ✅ PromptRenderer component tests - should render prompt content with arguments
-- [ ] ArgumentsForm component tests - should handle dynamic form inputs
-- [ ] Layout component tests - should render navigation and content areas
+- ✅ ArgumentsForm component tests - should handle dynamic form inputs
+- ✅ Layout component tests - should render navigation and content areas
 
 ### Page Tests (Medium Priority)
-- [ ] Home page tests - should integrate search and prompt listing
-- [ ] PromptDetail page tests - should display prompt details and handle arguments
+- ✅ Home page tests - should integrate search and prompt listing
+- ✅ PromptDetail page tests - should display prompt details and handle arguments
 
 ### Integration Tests (Low Priority)
 - [ ] End-to-end user flows - search → select → render prompt
