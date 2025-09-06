@@ -9,7 +9,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('')
   const [apiUrlCopied, setApiUrlCopied] = useState(false)
   
-  const apiUrl = `${window.location.origin}/prompts.json`
+  const apiUrl = `${window.location.origin}${import.meta.env.BASE_URL}prompts.json`
   
   const copyApiUrl = async () => {
     try {
@@ -76,9 +76,15 @@ export default function Home() {
           <div className="flex items-center justify-between gap-4">
             <div className="flex-1">
               <p className="text-sm text-gray-500 mb-1">API Endpoint</p>
-              <code className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
+              <a 
+                href={apiUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-mono bg-gray-100 px-2 py-1 rounded hover:bg-gray-200 transition-colors cursor-pointer inline-block"
+                title="Click to open JSON file in new tab"
+              >
                 {apiUrl}
-              </code>
+              </a>
             </div>
             <button
               onClick={copyApiUrl}

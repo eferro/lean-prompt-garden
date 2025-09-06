@@ -253,12 +253,23 @@ describe('Home Page', () => {
       expect(screen.getByText(/Response:/i)).toBeInTheDocument()
     })
 
-    it('should display correct API URL', () => {
+    it('should display correct API URL as clickable link', () => {
       renderWithRouter(<Home />)
 
-      // Should show the correct URL (using test environment URL)
-      const urlElement = screen.getByText(/\/prompts\.json$/)
-      expect(urlElement).toBeInTheDocument()
+      // Should show the correct URL as a clickable link
+      const linkElement = screen.getByRole('link', { name: /\/prompts\.json$/ })
+      expect(linkElement).toBeInTheDocument()
+      expect(linkElement).toHaveAttribute('target', '_blank')
+      expect(linkElement).toHaveAttribute('rel', 'noopener noreferrer')
+      expect(linkElement).toHaveAttribute('href', expect.stringContaining('/prompts.json'))
+    })
+
+    it('should have proper styling for the API URL link', () => {
+      renderWithRouter(<Home />)
+
+      const linkElement = screen.getByRole('link', { name: /\/prompts\.json$/ })
+      expect(linkElement).toHaveClass('font-mono', 'bg-gray-100', 'hover:bg-gray-200', 'cursor-pointer')
+      expect(linkElement).toHaveAttribute('title', 'Click to open JSON file in new tab')
     })
 
     it('should copy API URL to clipboard when copy button is clicked', async () => {
