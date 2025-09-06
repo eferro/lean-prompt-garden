@@ -18,7 +18,7 @@ export function usePromptDetail(name: string): UsePromptDetailResult {
         setLoading(true)
         setError(null)
         
-        const response = await fetch('/prompts.json')
+        const response = await fetch('./prompts.json')
         if (!response.ok) {
           throw new Error(`Failed to load prompts: ${response.statusText}`)
         }
