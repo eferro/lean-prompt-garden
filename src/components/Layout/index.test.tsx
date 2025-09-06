@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect } from 'vitest'
+import React from 'react'
 import Layout from './index'
 
 // Helper function to render Layout with router

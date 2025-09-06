@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+import React from 'react'
 import type { Prompt } from '../../types/prompt'
 import Home from './index'
 import * as usePromptsModule from '../../hooks/usePrompts'
