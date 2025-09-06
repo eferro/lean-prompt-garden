@@ -26,12 +26,19 @@ export function usePromptDetail(name: string): UsePromptDetailResult {
         
         const data: PromptData = await response.json()
         const promptDefinition = data.definitions[name]
+        const promptInfo = data.prompts.find(p => p.name === name)
         
         if (!promptDefinition) {
           throw new Error(`Prompt "${name}" not found`)
         }
         
-        setPrompt(promptDefinition)
+        // Combine arguments from prompts section with messages from definitions section
+        const combinedPrompt: PromptDefinition = {
+          ...promptDefinition,
+          arguments: promptInfo?.arguments || []
+        }
+        
+        setPrompt(combinedPrompt)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load prompt')
         console.error('Error loading prompt detail:', err)
