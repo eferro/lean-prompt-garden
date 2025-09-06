@@ -19,7 +19,8 @@
     "test:single": "vitest run --singleThread",
     "test:profile": "vitest run --reporter=verbose --slowTestThreshold=1000",
     "typecheck": "tsc --noEmit",
-    "build:pages": "NODE_ENV=production npm run build"
+    "build:pages": "NODE_ENV=production npm run build",
+    "postinstall": "git config core.hooksPath .githooks || true"
   },
   "dependencies": {
     "@headlessui/react": "1.7.17",
