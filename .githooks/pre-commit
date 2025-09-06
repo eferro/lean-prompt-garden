@@ -1,2 +1,29 @@
 #!/bin/sh
+
+echo "🔍 Running pre-commit validations..."
+
+# Run linting
+echo "📋 Running linter..."
 npm run lint
+if [ $? -ne 0 ]; then
+  echo "❌ Linting failed. Please fix the issues before committing."
+  exit 1
+fi
+
+# Run type checking
+echo "🔍 Running TypeScript type checking..."
+npm run typecheck
+if [ $? -ne 0 ]; then
+  echo "❌ TypeScript type checking failed. Please fix the issues before committing."
+  exit 1
+fi
+
+# Run tests
+echo "🧪 Running tests..."
+npm run test
+if [ $? -ne 0 ]; then
+  echo "❌ Tests failed. Please fix the issues before committing."
+  exit 1
+fi
+
+echo "✅ All validations passed! Proceeding with commit..."

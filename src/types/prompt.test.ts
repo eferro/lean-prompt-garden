@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import type { PromptArgument, PromptDefinition, Prompt } from './prompt'
+import type { PromptArgument, Prompt } from './prompt'
 
 describe('Prompt Types', () => {
   it('should create a valid PromptArgument', () => {
