@@ -18,7 +18,8 @@ export function usePrompts(): UsePromptsResult {
         setLoading(true)
         setError(null)
         
-        const response = await fetch('./prompts.json')
+        const basePath = process.env.NODE_ENV === 'production' ? '/lean-prompt-garden/' : '/'
+        const response = await fetch(basePath + 'prompts.json')
         if (!response.ok) {
           throw new Error(`Failed to load prompts: ${response.statusText}`)
         }
