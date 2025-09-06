@@ -40,4 +40,4 @@ dist-ssr
 .playwright-mcp/
 
 # Repomix output files
-repomix-output-*.md
+repomix-output-*.mdcoverage/

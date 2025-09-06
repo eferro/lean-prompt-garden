@@ -1,11 +1,8 @@
 name: Deploy to GitHub Pages
 
 on:
-  workflow_run:
-    workflows: ["Continuous Integration"]
+  push:
     branches: [ main ]
-    types: 
-      - completed
   workflow_dispatch:
 
 permissions:
@@ -18,10 +15,39 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  # First run CI checks
+  ci-checks:
     runs-on: ubuntu-latest
-    # Only run if CI workflow was successful or if manually dispatched
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    name: CI Checks
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run linting
+        run: npm run lint
+        
+      - name: Run type checking
+        run: npm run typecheck
+        
+      - name: Run tests
+        run: npm run test
+        
+      - name: Test build
+        run: npm run build
+
+  build:
+    needs: ci-checks
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
