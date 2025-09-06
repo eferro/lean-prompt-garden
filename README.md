@@ -46,9 +46,14 @@ npm run dev
 # Build for production
 npm run build
 
+# Lint code
+npm run lint
+
 # Run tests
 npm run test
 ```
+
+Git hooks are configured to run ESLint automatically before each commit. If hooks are missing, run `npm install` to set them up.
 
 ## MCP Compatibility
 
