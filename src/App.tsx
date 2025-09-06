@@ -1,0 +1,17 @@
+import { Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import PromptDetail from './pages/PromptDetail'
+
+function App() {
+  return (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/prompt/:name" element={<PromptDetail />} />
+      </Routes>
+    </Layout>
+  )
+}
+
+export default App

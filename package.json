@@ -1,27 +1,59 @@
 {
   "name": "lean-prompt-garden",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "snap": "node scripts/snap.mjs",
-    "build": "node scripts/build.mjs",
-    "serve": "npx http-server docs -p 8080 -c-1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eferro/lean-prompt-garden.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "private": true,
+  "version": "0.0.0",
   "type": "module",
-  "bugs": {
-    "url": "https://github.com/eferro/lean-prompt-garden/issues"
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "test:fast": "vitest run --reporter=default",
+    "test:unit": "vitest run src/utils src/hooks",
+    "test:components": "vitest run src/components",
+    "test:changed": "vitest run --changed",
+    "test:single": "vitest run --singleThread",
+    "test:profile": "vitest run --reporter=verbose --slowTestThreshold=1000",
+    "prepare": "husky",
+    "typecheck": "tsc --noEmit"
   },
-  "homepage": "https://github.com/eferro/lean-prompt-garden#readme",
+  "dependencies": {
+    "@headlessui/react": "1.7.17",
+    "@heroicons/react": "^2.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.7.0",
+    "rehype-sanitize": "^6.0.0"
+  },
   "devDependencies": {
-    "playwright": "^1.55.0"
+    "@eslint/js": "^9.32.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^3.1.1",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "globals": "^13.20.0",
+    "husky": "^9.0.10",
+    "jsdom": "^24.0.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4",
+    "vitest": "^3.1.1"
   }
 }

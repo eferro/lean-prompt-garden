@@ -12,15 +12,90 @@
         { "name": "days", "description": "Number of days to check for heavy churn", "required": true }
       ]
     },
-    { "name": "gardener_naming_api_clarity", "title": "Gardener · Naming & API Clarity", "description": "DDD-aligned naming, value objects, and intent-revealing APIs without behavior change." },
-    { "name": "gardener_deadcode_dup_pruner", "title": "Gardener · Dead Code & Duplication Pruner", "description": "Evidence-driven deletion and tiny DRY merges with strict safety gates." },
-    { "name": "gardener_complexity_reducer", "title": "Gardener · Complexity Reducer", "description": "Lower cyclomatic/cognitive complexity via small, behavior-preserving extractions." },
-    { "name": "gardener_test_suite_gardener", "title": "Gardener · Test Gardener", "description": "Strengthen tests first; kill flakiness/slow tests; introduce seams safely." },
-    { "name": "gardener_dependency_gardener", "title": "Gardener · Dependency Gardener", "description": "Safe micro-upgrades (patch/minor), one logical upgrade per PR, full CI + smoke check." },
-    { "name": "gardener_parallel_change_preparer", "title": "Gardener · Parallel-Change Preparer", "description": "Introduce a reversible seam with a toggle/flag; keep old and new paths working." },
-    { "name": "gardener_boundary_clarifier", "title": "Gardener · Boundary Clarifier", "description": "Tighten domain/infra boundaries (ports/adapters) in tiny steps." },
-    { "name": "gardener_invariant_guardrails", "title": "Gardener · Invariant Guardrails", "description": "Add value objects/validations and fast-fail assertions for key invariants." },
-    { "name": "gardener_fitness_functions", "title": "Gardener · Fitness-Function Writer", "description": "Encode small architecture rules as tests/static checks; wire into CI." }
+    { 
+      "name": "gardener_naming_api_clarity", 
+      "title": "Gardener · Naming & API Clarity", 
+      "description": "DDD-aligned naming, value objects, and intent-revealing APIs without behavior change.",
+      "arguments": [
+        { "name": "module_or_path", "description": "Target module or path to refactor", "required": true },
+        { "name": "max_renames", "description": "Maximum number of automated renames allowed", "required": true }
+      ]
+    },
+    { 
+      "name": "gardener_deadcode_dup_pruner", 
+      "title": "Gardener · Dead Code & Duplication Pruner", 
+      "description": "Evidence-driven deletion and tiny DRY merges with strict safety gates.",
+      "arguments": [
+        { "name": "paths", "description": "Target paths to analyze for dead code", "required": true },
+        { "name": "coverage_cmd", "description": "Command to check coverage/runtime", "required": true },
+        { "name": "stale_days", "description": "Git inactivity threshold in days", "required": true },
+        { "name": "max_deleted_lines", "description": "Maximum number of lines to delete", "required": true }
+      ]
+    },
+    { 
+      "name": "gardener_complexity_reducer", 
+      "title": "Gardener · Complexity Reducer", 
+      "description": "Lower cyclomatic/cognitive complexity via small, behavior-preserving extractions.",
+      "arguments": [
+        { "name": "report_path_or_cmd", "description": "Path to complexity report or command to generate it", "required": true },
+        { "name": "max_diff_lines", "description": "Maximum number of changed lines allowed", "required": true },
+        { "name": "max_new_classes", "description": "Maximum number of new strategy/command objects", "required": true }
+      ]
+    },
+    { 
+      "name": "gardener_test_suite_gardener", 
+      "title": "Gardener · Test Gardener", 
+      "description": "Strengthen tests first; kill flakiness/slow tests; introduce seams safely.",
+      "arguments": [
+        { "name": "test_paths", "description": "Target test paths to improve", "required": true },
+        { "name": "runtime_pct", "description": "Target percentage reduction in runtime", "required": true }
+      ]
+    },
+    { 
+      "name": "gardener_dependency_gardener", 
+      "title": "Gardener · Dependency Gardener", 
+      "description": "Safe micro-upgrades (patch/minor), one logical upgrade per PR, full CI + smoke check.",
+      "arguments": [
+        { "name": "manifest_path_or_list", "description": "Path to package manifest or list of dependencies", "required": true },
+        { "name": "smoke_cmd", "description": "Command to run smoke tests", "required": true }
+      ]
+    },
+    { 
+      "name": "gardener_parallel_change_preparer", 
+      "title": "Gardener · Parallel-Change Preparer", 
+      "description": "Introduce a reversible seam with a toggle/flag; keep old and new paths working.",
+      "arguments": [
+        { "name": "target_component", "description": "Component to prepare for parallel change", "required": true },
+        { "name": "new_iface_name", "description": "Name for the new interface/adapter", "required": true },
+        { "name": "flag_name", "description": "Name for the feature flag", "required": true },
+        { "name": "max_diff_lines", "description": "Maximum number of changed lines allowed", "required": true }
+      ]
+    },
+    { 
+      "name": "gardener_boundary_clarifier", 
+      "title": "Gardener · Boundary Clarifier", 
+      "description": "Tighten domain/infra boundaries (ports/adapters) in tiny steps.",
+      "arguments": [
+        { "name": "domain_module", "description": "Target domain module to clarify boundaries", "required": true }
+      ]
+    },
+    { 
+      "name": "gardener_invariant_guardrails", 
+      "title": "Gardener · Invariant Guardrails", 
+      "description": "Add value objects/validations and fast-fail assertions for key invariants.",
+      "arguments": [
+        { "name": "aggregate_or_entity", "description": "Target aggregate or entity to add guardrails", "required": true }
+      ]
+    },
+    { 
+      "name": "gardener_fitness_functions", 
+      "title": "Gardener · Fitness-Function Writer", 
+      "description": "Encode small architecture rules as tests/static checks; wire into CI.",
+      "arguments": [
+        { "name": "tooling_choice", "description": "Tooling to use for implementing fitness functions", "required": true },
+        { "name": "tooling_path", "description": "Path to place the fitness function tooling", "required": true }
+      ]
+    }
   ],
   "definitions": {
     "gardener_scout_rule_refactorer": { "name": "gardener_scout_rule_refactorer", "title": "Gardener · Scout-Rule Refactorer", "description": "Behavior-preserving micro-refactors; tiny reversible steps; always-green CI; XP/Lean/TDD aligned.", "messages": [ { "role": "user", "content": { "type": "text", "text": "ROLE: Autonomous Software Gardener.\nWORKING STYLE: XP + Lean, TDD first, trunk-based development, walking skeleton, continuous delivery, DDD naming, YAGNI. Keep mainline green.\nSCOPE: {{repo_or_path_glob}}\nTIMEBOX: {{timebox_minutes}} minutes\nLIMITS: ≤ {{max_diff_lines}} changed lines total; ≤ {{max_files}} files touched; avoid files with heavy churn in last {{days}} days.\nTASK:\n1) Identify 1–3 low-risk, high-signal refactors (rename for clarity, extract small pure functions, remove duplication, inline trivial indirections).\n2) Add/strengthen micro-tests BEFORE refactor where coverage is weak. Keep behavior constant.\n3) Run: lint, type-check, unit tests, fast integration.\n4) Prepare ONE PR.\nCONSTRAINTS:\n- No public API changes. No cross-module moves. No formatting-only PRs.\n- Keep commits atomic; intent-revealing commit messages.\nPR TEMPLATE:\nTitle: Gardening: <short noun phrase>\nBody: Problem & rationale; Summary of refactors; Test evidence (commands + counts); Risk assessment (why behavior unchanged); Rollback plan (git revert hash).\nChecklist: [ ] Tests green  [ ] No API changes  [ ] ≤ {{max_diff_lines}} LOC  [ ] Changelog/ADR updated if needed\n" } } ] },
