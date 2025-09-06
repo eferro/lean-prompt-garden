@@ -36,5 +36,8 @@ dist-ssr
 # SpecStory files (development documentation)
 .specstory/
 
+# Playwright MCP testing artifacts
+.playwright-mcp/
+
 # Repomix output files
 repomix-output-*.md
