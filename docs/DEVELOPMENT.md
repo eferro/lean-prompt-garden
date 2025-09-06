@@ -44,6 +44,9 @@ Deployment only occurs if CI passes successfully.
 # Run all validations (recommended before push)
 npm run validate
 
+# Run all validations + coverage report  
+npm run validate:coverage
+
 # Or individual:
 npm run lint        # ESLint
 npm run typecheck   # TypeScript

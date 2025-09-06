@@ -2,6 +2,10 @@
 
 # Validation script for lean-prompt-garden
 # This script runs all quality checks that are also run in CI/CD
+#
+# Usage:
+#   ./scripts/validate.sh           # Run validations only
+#   ./scripts/validate.sh --coverage # Run validations + coverage report
 
 set -e  # Exit on any error
 
@@ -37,11 +41,9 @@ echo ""
 echo "🎉 All validations passed! Your code is ready for deployment."
 echo "======================================"
 
-# Optional: Show test coverage
-echo ""
-read -p "🔎 Would you like to see test coverage? (y/N): " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+# Optional: Show test coverage if --coverage flag is provided
+if [[ "$1" == "--coverage" ]]; then
+    echo ""
     echo "📊 Running test coverage..."
     npm run test:coverage
 fi

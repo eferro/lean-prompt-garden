@@ -20,6 +20,7 @@
     "test:profile": "vitest run --reporter=verbose --slowTestThreshold=1000",
     "typecheck": "tsc --noEmit",
     "validate": "./scripts/validate.sh",
+    "validate:coverage": "./scripts/validate.sh --coverage",
     "build:pages": "NODE_ENV=production npm run build",
     "postinstall": "git config core.hooksPath .githooks || true"
   },
