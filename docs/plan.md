@@ -47,6 +47,14 @@
 - [ ] Verify copy-to-clipboard functionality for design prompts
 - [ ] Test search integration finds design prompts by relevant keywords
 
+## Direct API Access (New Feature)
+
+### API Endpoint Implementation (High Priority)
+- ✅ Create direct endpoint for accessing prompts.json
+- ✅ Add API documentation section to Home page
+- ✅ Test endpoint accessibility and CORS configuration
+- ✅ Validate JSON response structure matches MCP specification
+
 ## TDD Rules for Next Steps
 
 1. **Red → Green → Refactor** cycle for each unmarked test

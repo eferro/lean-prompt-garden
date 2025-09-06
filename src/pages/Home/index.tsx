@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { MagnifyingGlassIcon, LinkIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline'
 import PromptCard from '../../components/PromptCard'
 import SearchBox from '../../components/SearchBox'
 import { usePrompts } from '../../hooks/usePrompts'
@@ -7,6 +7,19 @@ import { usePrompts } from '../../hooks/usePrompts'
 export default function Home() {
   const { prompts, loading, error } = usePrompts()
   const [searchQuery, setSearchQuery] = useState('')
+  const [apiUrlCopied, setApiUrlCopied] = useState(false)
+  
+  const apiUrl = `${window.location.origin}/prompts.json`
+  
+  const copyApiUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(apiUrl)
+      setApiUrlCopied(true)
+      setTimeout(() => setApiUrlCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy API URL:', err)
+    }
+  }
 
   const filteredPrompts = useMemo(() => {
     if (!searchQuery) return prompts
@@ -47,6 +60,41 @@ export default function Home() {
           A curated collection of software gardening prompts designed for lean development practices.
           Each prompt follows Test-Driven Development, Extreme Programming, and continuous improvement principles.
         </p>
+      </div>
+
+      {/* API Access Section */}
+      <div className="bg-gray-50 rounded-lg p-6 max-w-4xl mx-auto">
+        <div className="flex items-center gap-2 mb-4">
+          <LinkIcon className="h-5 w-5 text-indigo-600" />
+          <h2 className="text-lg font-semibold text-gray-900">Direct API Access</h2>
+        </div>
+        <p className="text-gray-600 mb-4">
+          Access all prompts directly via our JSON API endpoint. Perfect for integrating with your own tools, 
+          CI/CD pipelines, or MCP-compatible applications.
+        </p>
+        <div className="bg-white rounded-md border p-4">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex-1">
+              <p className="text-sm text-gray-500 mb-1">API Endpoint</p>
+              <code className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
+                {apiUrl}
+              </code>
+            </div>
+            <button
+              onClick={copyApiUrl}
+              className="flex items-center gap-2 px-3 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+              title="Copy API URL"
+            >
+              <DocumentDuplicateIcon className="h-4 w-4" />
+              {apiUrlCopied ? 'Copied!' : 'Copy'}
+            </button>
+          </div>
+          <div className="mt-4 text-sm text-gray-600">
+            <p><strong>Format:</strong> JSON (MCP-compatible)</p>
+            <p><strong>CORS:</strong> Enabled for cross-origin requests</p>
+            <p><strong>Response:</strong> Complete prompt collection with definitions</p>
+          </div>
+        </div>
       </div>
 
       {/* Search */}

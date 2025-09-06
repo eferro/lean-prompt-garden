@@ -216,4 +216,96 @@ describe('Home Page', () => {
       expect(screen.getByText('Found 1 of 3 prompts')).toBeInTheDocument()
     })
   })
+
+  // API Access Section Tests
+  describe('API Access Section', () => {
+    beforeEach(() => {
+      const mockedUsePrompts = vi.mocked(usePromptsModule.usePrompts)
+      mockedUsePrompts.mockReturnValue({
+        prompts: mockPrompts,
+        loading: false,
+        error: null,
+      })
+      
+      // Mock clipboard API
+      Object.assign(navigator, {
+        clipboard: {
+          writeText: vi.fn().mockResolvedValue(undefined),
+        },
+      })
+    })
+
+    it('should display API access section with correct information', () => {
+      renderWithRouter(<Home />)
+
+      // Should show API section heading
+      expect(screen.getByText('Direct API Access')).toBeInTheDocument()
+      
+      // Should show description
+      expect(screen.getByText(/Access all prompts directly via our JSON API endpoint/i)).toBeInTheDocument()
+      
+      // Should show API endpoint label
+      expect(screen.getByText('API Endpoint')).toBeInTheDocument()
+      
+      // Should show format information
+      expect(screen.getByText(/JSON \(MCP-compatible\)/i)).toBeInTheDocument()
+      expect(screen.getByText(/CORS:/i)).toBeInTheDocument()
+      expect(screen.getByText(/Response:/i)).toBeInTheDocument()
+    })
+
+    it('should display correct API URL', () => {
+      renderWithRouter(<Home />)
+
+      // Should show the correct URL (using test environment URL)
+      const urlElement = screen.getByText(/\/prompts\.json$/)
+      expect(urlElement).toBeInTheDocument()
+    })
+
+    it('should copy API URL to clipboard when copy button is clicked', async () => {
+      renderWithRouter(<Home />)
+
+      const copyButton = screen.getByRole('button', { name: /copy api url|copy/i })
+      expect(copyButton).toBeInTheDocument()
+
+      fireEvent.click(copyButton)
+
+      // Should call clipboard API
+      await waitFor(() => {
+        expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
+          expect.stringContaining('/prompts.json')
+        )
+      })
+
+      // Should show success state
+      await waitFor(() => {
+        expect(screen.getByText('Copied!')).toBeInTheDocument()
+      })
+
+      // Should reset after timeout (we can't easily test the timeout, but we can test it changes back)
+      expect(copyButton).toBeInTheDocument()
+    })
+
+    it('should handle copy error gracefully', async () => {
+      // Mock clipboard to reject
+      Object.assign(navigator, {
+        clipboard: {
+          writeText: vi.fn().mockRejectedValue(new Error('Copy failed')),
+        },
+      })
+
+      // Spy on console.error
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+
+      renderWithRouter(<Home />)
+
+      const copyButton = screen.getByRole('button', { name: /copy api url|copy/i })
+      fireEvent.click(copyButton)
+
+      await waitFor(() => {
+        expect(consoleSpy).toHaveBeenCalledWith('Failed to copy API URL:', expect.any(Error))
+      })
+
+      consoleSpy.mockRestore()
+    })
+  })
 })
