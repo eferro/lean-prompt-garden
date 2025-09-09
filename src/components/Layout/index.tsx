@@ -33,6 +33,12 @@ export default function Layout({ children }: LayoutProps) {
               >
                 About
               </Link>
+              <Link
+                to="/api"
+                className="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium"
+              >
+                API
+              </Link>
               <a
                 href="https://modelcontextprotocol.io"
                 target="_blank"
