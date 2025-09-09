@@ -91,7 +91,7 @@ describe('Home Page', () => {
     expect(screen.getByText(/failed to load prompts/i)).toBeInTheDocument()
   })
 
-  it('should display hero section and search box when loaded', () => {
+  it('should display search box when loaded', () => {
     const mockedUsePrompts = vi.mocked(usePromptsModule.usePrompts)
     mockedUsePrompts.mockReturnValue({
       prompts: mockPrompts,
@@ -100,10 +100,6 @@ describe('Home Page', () => {
     })
 
     renderWithRouter(<Home />)
-
-    // Hero section
-    expect(screen.getByText('Lean Prompt Garden')).toBeInTheDocument()
-    expect(screen.getByText(/curated collection of lean development prompts/i)).toBeInTheDocument()
 
     // Search box
     expect(screen.getByTestId('search-box')).toBeInTheDocument()

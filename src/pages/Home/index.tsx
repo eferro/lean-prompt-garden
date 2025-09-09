@@ -51,16 +51,6 @@ export default function Home() {
 
   return (
     <div className="space-y-8">
-      {/* Hero Section */}
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Lean Prompt Garden
-        </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          A curated collection of lean development prompts
-        </p>
-      </div>
-
       {/* API Access Section */}
       <div className="bg-gray-50 rounded-lg p-6 max-w-4xl mx-auto">
         <div className="flex items-center gap-2 mb-4">
