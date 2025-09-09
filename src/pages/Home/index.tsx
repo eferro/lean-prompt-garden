@@ -56,9 +56,8 @@ export default function Home() {
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Lean Prompt Garden
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          A curated collection of software gardening prompts designed for lean development practices.
-          Each prompt follows Test-Driven Development, Extreme Programming, and continuous improvement principles.
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          A curated collection of lean development prompts
         </p>
       </div>
 

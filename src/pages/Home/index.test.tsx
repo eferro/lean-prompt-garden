@@ -103,7 +103,7 @@ describe('Home Page', () => {
 
     // Hero section
     expect(screen.getByText('Lean Prompt Garden')).toBeInTheDocument()
-    expect(screen.getByText(/curated collection of software gardening prompts/i)).toBeInTheDocument()
+    expect(screen.getByText(/curated collection of lean development prompts/i)).toBeInTheDocument()
 
     // Search box
     expect(screen.getByTestId('search-box')).toBeInTheDocument()
