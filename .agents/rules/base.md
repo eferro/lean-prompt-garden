@@ -80,11 +80,14 @@ Only commit when ALL of the following are true:
 
 ## 6. Test Execution Requirements
 
-### Test Running Protocol
-- Always run ALL tests (except long-running tests) after each change
+### Test Running Protocol - MANDATORY AFTER EVERY CHANGE
+- **CRITICAL**: Always run ALL tests (except long-running tests) after **EVERY SINGLE CHANGE** - no exceptions
+- **NEVER ASSUME**: Do not assume changes are correct without full test validation
 - Run tests before and after structural changes to verify behavior preservation
 - Never proceed to the next step if any tests are failing
+- Never consider a task "complete" until all tests pass
 - Use the project's make targets for test execution (e.g., `make test-unit`)
+- **AI Rule**: The AI must execute full test suite before marking any implementation as complete
 
 ### Test Quality Standards
 - One test at a time - never write multiple tests simultaneously
