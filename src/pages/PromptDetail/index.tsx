@@ -9,6 +9,7 @@ import {
 import { usePromptDetail } from '../../hooks/usePromptDetail'
 import PromptRenderer from '../../components/PromptRenderer'
 import ArgumentsForm from '../../components/ArgumentsForm'
+import { renderPromptTemplate } from '../../utils/prompt'
 
 export default function PromptDetail() {
   const { name } = useParams<{ name: string }>()
@@ -19,7 +20,10 @@ export default function PromptDetail() {
   const handleCopyPrompt = async () => {
     if (!prompt) return
 
-    const renderedText = renderPromptText(prompt.messages[0]?.content?.text || '', argumentValues)
+    const renderedText = renderPromptTemplate(
+      prompt.messages[0]?.content?.text || '',
+      argumentValues
+    )
     
     try {
       await navigator.clipboard.writeText(renderedText)
@@ -28,13 +32,6 @@ export default function PromptDetail() {
     } catch (err) {
       console.error('Failed to copy:', err)
     }
-  }
-
-  const renderPromptText = (text: string, args: Record<string, string>) => {
-    return Object.keys(args).reduce((result, key) => {
-      const value = args[key] || `{{${key}}}`
-      return result.replace(new RegExp(`{{${key}}}`, 'g'), value)
-    }, text)
   }
 
   if (loading) {

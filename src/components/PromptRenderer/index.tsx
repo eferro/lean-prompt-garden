@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown'
 import type { PromptDefinition } from '../../types/prompt'
+import { renderPromptTemplate } from '../../utils/prompt'
 
 interface PromptRendererProps {
   prompt: PromptDefinition
@@ -7,13 +8,6 @@ interface PromptRendererProps {
 }
 
 export default function PromptRenderer({ prompt, argumentValues }: PromptRendererProps) {
-  const renderPromptText = (text: string, args: Record<string, string>) => {
-    return Object.keys(args).reduce((result, key) => {
-      const value = args[key] || `{{${key}}}`
-      return result.replace(new RegExp(`{{${key}}}`, 'g'), value)
-    }, text)
-  }
-
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">
@@ -45,7 +39,7 @@ export default function PromptRenderer({ prompt, argumentValues }: PromptRendere
             {message.content.type === 'text' && message.content.text && (
               <div className="prose prose-sm max-w-none">
                 <ReactMarkdown>
-                  {renderPromptText(message.content.text, argumentValues)}
+                  {renderPromptTemplate(message.content.text, argumentValues)}
                 </ReactMarkdown>
               </div>
             )}

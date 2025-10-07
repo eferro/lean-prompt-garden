@@ -12,6 +12,7 @@ export function validatePrompt(prompt: Prompt): boolean {
   return true
 }
 
+
 export function validateArgument(argument: PromptArgument): boolean {
   return !!(argument.name && argument.description && typeof argument.required === 'boolean')
 }
@@ -36,4 +37,14 @@ export function sortPrompts(prompts: Prompt[], sortBy: 'name' | 'title' = 'title
     const bValue = b[sortBy].toLowerCase()
     return aValue.localeCompare(bValue)
   })
+}
+
+export function renderPromptTemplate(
+  template: string,
+  argumentValues: Record<string, string>
+): string {
+  return Object.keys(argumentValues).reduce((result, key) => {
+    const value = argumentValues[key] || `{{${key}}}`
+    return result.replace(new RegExp(`{{${key}}}`, 'g'), value)
+  }, template)
 }
