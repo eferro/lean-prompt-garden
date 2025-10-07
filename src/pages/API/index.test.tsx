@@ -35,10 +35,18 @@ describe('API', () => {
     expect(screen.getByRole('heading', { name: /best practices/i })).toBeInTheDocument()
   })
 
+  const getExpectedEndpoint = () => {
+    const basePath = import.meta.env.BASE_URL.endsWith('/')
+      ? import.meta.env.BASE_URL
+      : `${import.meta.env.BASE_URL}/`
+
+    return `${window.location.origin}${basePath}prompts.json`
+  }
+
   it('should display the API endpoint', () => {
     render(<API />)
-    
-    expect(screen.getByText('http://localhost:5173/prompts.json')).toBeInTheDocument()
+
+    expect(screen.getByText(getExpectedEndpoint())).toBeInTheDocument()
   })
 
   it('should show API details', () => {
@@ -58,7 +66,7 @@ describe('API', () => {
     fireEvent.click(copyButton)
     
     await waitFor(() => {
-      expect(navigator.clipboard.writeText).toHaveBeenCalledWith('http://localhost:5173/prompts.json')
+      expect(navigator.clipboard.writeText).toHaveBeenCalledWith(getExpectedEndpoint())
     })
     
     expect(screen.getByText('Copied')).toBeInTheDocument()

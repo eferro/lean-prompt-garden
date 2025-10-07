@@ -3,7 +3,13 @@ import { CodeBracketIcon, DocumentDuplicateIcon, CheckIcon } from '@heroicons/re
 
 export default function API() {
   const [copied, setCopied] = useState(false)
-  const apiEndpoint = 'http://localhost:5173/prompts.json'
+  const apiEndpoint = (() => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : ''
+    const basePath = import.meta.env.BASE_URL?.length ? import.meta.env.BASE_URL : '/'
+    const normalizedBasePath = basePath.endsWith('/') ? basePath : `${basePath}/`
+
+    return `${origin}${normalizedBasePath}prompts.json`
+  })()
 
   const copyToClipboard = async () => {
     try {
