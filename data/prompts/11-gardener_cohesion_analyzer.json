@@ -1,0 +1,31 @@
+{
+  "name": "gardener_cohesion_analyzer",
+  "title": "Gardener · Cohesion Analyzer",
+  "description": "Identify components with mixed responsibilities and extract secondary concerns.",
+  "messages": [
+    {
+      "role": "user",
+      "content": {
+        "type": "text",
+        "text": "ROLE: Software Gardener specialized in cohesion analysis.\nTARGET: {{module_or_class_path}}\nLIMITS: Max {{max_extractions}} extracted components; ≤ {{max_diff_lines}} changed lines total.\nTASK:\n1) Analyze component for single responsibility violations (mixed domains, unrelated methods, functions that seem out of place).\n2) Identify secondary responsibilities that can be extracted into focused components.\n3) Add characterization tests before extraction to preserve behavior.\n4) Extract mixed concerns using small, reversible steps (extract method → extract class).\n5) Validate isolation: can each component be tested independently?\nCONSTRAINTS:\n- Keep behavior constant; no public API changes.\n- Consistent naming to maintain cohesion within extracted components.\n- Avoid cross-module dependencies in extractions.\nOUTPUT: PR with cohesion analysis report (before/after responsibility matrix), extracted components list, and test evidence that behavior is preserved.\n"
+      }
+    }
+  ],
+  "arguments": [
+    {
+      "name": "module_or_class_path",
+      "description": "Target module or class to analyze for cohesion issues",
+      "required": true
+    },
+    {
+      "name": "max_extractions",
+      "description": "Maximum number of extracted components allowed",
+      "required": true
+    },
+    {
+      "name": "max_diff_lines",
+      "description": "Maximum number of changed lines allowed",
+      "required": true
+    }
+  ]
+}

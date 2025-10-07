@@ -1,0 +1,36 @@
+{
+  "name": "gardener_deadcode_dup_pruner",
+  "title": "Gardener · Dead Code & Duplication Pruner",
+  "description": "Evidence-driven deletion and tiny DRY merges with strict safety gates.",
+  "messages": [
+    {
+      "role": "user",
+      "content": {
+        "type": "text",
+        "text": "ROLE: Software Gardener prioritizing simplicity and basal cost reduction.\nTARGET PATHS: {{paths}}\nEVIDENCE SOURCES: Coverage/Runtime via {{coverage_cmd}}; Git inactivity threshold {{stale_days}} days; static search (unreferenced symbols/branches).\nLIMITS: Max deletions ≤ {{max_deleted_lines}} lines; keep public API intact.\nTASK:\n1) Prove unreachability for dead code candidates (search/build/coverage evidence).\n2) Add/boost tests at remaining call sites to preserve behavior.\n3) Delete dead code or merge tiny duplications (≤ 25 lines each) via extract method.\nPR BODY must include an Evidence Table (symbol → refs → coverage → decision), risks, and rollback.\n"
+      }
+    }
+  ],
+  "arguments": [
+    {
+      "name": "paths",
+      "description": "Target paths to analyze for dead code",
+      "required": true
+    },
+    {
+      "name": "coverage_cmd",
+      "description": "Command to check coverage/runtime",
+      "required": true
+    },
+    {
+      "name": "stale_days",
+      "description": "Git inactivity threshold in days",
+      "required": true
+    },
+    {
+      "name": "max_deleted_lines",
+      "description": "Maximum number of lines to delete",
+      "required": true
+    }
+  ]
+}

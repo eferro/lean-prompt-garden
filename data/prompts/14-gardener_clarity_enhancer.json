@@ -1,0 +1,31 @@
+{
+  "name": "gardener_clarity_enhancer",
+  "title": "Gardener · Clarity Enhancer",
+  "description": "Make code self-explanatory through descriptive naming and predictable interfaces.",
+  "messages": [
+    {
+      "role": "user",
+      "content": {
+        "type": "text",
+        "text": "ROLE: Code Clarity Specialist focused on obviousness.\nTARGET: {{module_or_package}}\nLIMITS: Max {{max_renames}} automated renames; ≤ {{max_diff_lines}} changed lines; preserve all behavior.\nTASK:\n1) Identify unclear method/variable names using intent-revealing patterns (ambiguous names, abbreviated terms, misleading names).\n2) Analyze predictability of operations and their side effects (surprising behavior, inconsistent naming patterns).\n3) Rename using domain-appropriate, descriptive terms that make purpose immediately clear.\n4) Ensure method results are predictable and interfaces are intuitive without documentation.\n5) Verify usage remains clear and self-explanatory to new developers.\nCONSTRAINTS:\n- Use descriptive and consistent names throughout.\n- Avoid surprises: maintain consistency in naming patterns.\n- Make code readable without requiring documentation.\nOUTPUT: PR with clarity improvement report (before/after naming examples), consistency analysis, and evidence that code is now self-explanatory and intuitive to use.\n"
+      }
+    }
+  ],
+  "arguments": [
+    {
+      "name": "module_or_package",
+      "description": "Target module or package to enhance clarity",
+      "required": true
+    },
+    {
+      "name": "max_renames",
+      "description": "Maximum number of automated renames allowed",
+      "required": true
+    },
+    {
+      "name": "max_diff_lines",
+      "description": "Maximum number of changed lines allowed",
+      "required": true
+    }
+  ]
+}
