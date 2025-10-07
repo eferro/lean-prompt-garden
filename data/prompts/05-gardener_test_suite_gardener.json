@@ -1,0 +1,26 @@
+{
+  "name": "gardener_test_suite_gardener",
+  "title": "Gardener · Test Gardener",
+  "description": "Strengthen tests first; eliminate flakiness and reduce runtime without losing signal.",
+  "messages": [
+    {
+      "role": "user",
+      "content": {
+        "type": "text",
+        "text": "ROLE: Test Gardener.\nTARGET: {{test_paths}}\nGOAL: Reduce total test runtime by ≥ {{runtime_pct}}% and remove flaky patterns.\nTASK:\n1) Identify 1–2 brittle/slow tests (sleep/polling, network/file I/O, shared mutable state).\n2) Introduce seams (ports/adapters) to stub external systems; prefer table-driven or property-based tests for pure logic.\n3) Replace broad E2E checks with focused component tests where appropriate; add missing edge-case tests; remove redundant overlaps.\nOUTPUT: PR with runtime before/after, flakiness notes, and evidence that coverage/signal did not regress.\n"
+      }
+    }
+  ],
+  "arguments": [
+    {
+      "name": "test_paths",
+      "description": "Target test paths to improve",
+      "required": true
+    },
+    {
+      "name": "runtime_pct",
+      "description": "Target percentage reduction in runtime",
+      "required": true
+    }
+  ]
+}

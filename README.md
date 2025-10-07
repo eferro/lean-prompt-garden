@@ -40,6 +40,9 @@ A curated collection of software gardening prompts for lean development practice
 # Install dependencies
 npm install
 
+# Generate prompts.json from individual prompt files
+npm run generate-prompts
+
 # Start development server
 npm run dev
 
@@ -54,6 +57,10 @@ npm run test
 ```
 
 Git hooks are configured to run ESLint automatically before each commit. If hooks are missing, run `npm install` to set them up.
+
+### Prompt data workflow
+
+Prompt metadata and definitions now live in `data/prompts/*.json`. Each file contains the display information (`name`, `title`, `description`, `arguments`) and the full `messages` array for a single prompt. After editing any of these files, run `npm run generate-prompts` to regenerate `public/prompts.json`. The command is wired into the `prepare`, `dev`, and `build` scripts, but contributors should commit both the modified source files and the regenerated JSON.
 
 ## MCP Compatibility
 

@@ -64,6 +64,16 @@ npm run test:unit        # Only unit tests
 npm run test:components  # Only component tests
 ```
 
+### Prompt Data Workflow
+
+Prompt definitions are stored as individual files under `data/prompts/`. Each JSON file includes the prompt's list metadata (`name`, `title`, `description`, `arguments`) and the full `messages` payload. After editing or adding a prompt file, run:
+
+```bash
+npm run generate-prompts
+```
+
+The generator rebuilds `public/prompts.json`, which powers the UI and MCP endpoint. This command runs automatically during `npm run dev`, `npm run build`, and as part of the `prepare` script, but contributors must ensure the regenerated `public/prompts.json` is committed alongside the source prompt files.
+
 ### Build Scripts
 ```bash
 npm run build            # Standard build

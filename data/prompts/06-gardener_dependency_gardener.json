@@ -1,0 +1,26 @@
+{
+  "name": "gardener_dependency_gardener",
+  "title": "Gardener · Dependency Gardener",
+  "description": "Safe micro-upgrades (patch/minor), one logical upgrade per PR, full CI + smoke check and explicit rollback.",
+  "messages": [
+    {
+      "role": "user",
+      "content": {
+        "type": "text",
+        "text": "ROLE: Dependency Gardener.\nTARGET: {{manifest_path_or_list}}\nSMOKE: {{smoke_cmd}}\nTASK:\n1) Propose 1–2 patch/minor upgrades with the lowest blast radius.\n2) Refresh lockfile; run full tests and smoke deployment/runtime.\n3) If breaking changes appear, either adapt with minimal edits or skip; avoid majors unless explicitly allowed.\nOUTPUT: One PR per logical upgrade with changelog snippets, compatibility notes, and rollback instructions.\n"
+      }
+    }
+  ],
+  "arguments": [
+    {
+      "name": "manifest_path_or_list",
+      "description": "Path to package manifest or list of dependencies",
+      "required": true
+    },
+    {
+      "name": "smoke_cmd",
+      "description": "Command to run smoke tests",
+      "required": true
+    }
+  ]
+}

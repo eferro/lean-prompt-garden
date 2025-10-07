@@ -1,0 +1,31 @@
+{
+  "name": "gardener_design_principles_auditor",
+  "title": "Gardener · Design Principles Auditor",
+  "description": "Comprehensive design health check using cohesion, coupling, encapsulation, and clarity principles.",
+  "messages": [
+    {
+      "role": "user",
+      "content": {
+        "type": "text",
+        "text": "ROLE: Design Health Inspector using proven design principles.\nTARGET: {{codebase_path}}\nFOCUS: {{focus_area}} (cohesion|coupling|hiding|clarity|all)\nLIMITS: Max {{max_priority_fixes}} priority fixes; behavior must remain unchanged.\nTASK:\n1) Run comprehensive design analysis using the four core principles:\n   - COHESION: Does each module have a single clear responsibility?\n   - COUPLING: How much does each part depend on the rest of the system?\n   - INFORMATION HIDING: Are we exposing only what is necessary?\n   - OBVIOUS SYSTEM: Does the code explain itself?\n2) Apply the design health checklist to sample key components:\n   - Does each module have a clear purpose?\n   - Could I change this without breaking half the system?\n   - Am I exposing the minimum necessary?\n   - Would a new team member understand this without help?\n3) Identify top {{max_priority_fixes}} design debt items with concrete examples and measurable impact.\n4) Provide actionable remediation plan with effort estimates and risk assessment.\nCONSTRAINTS:\n- No behavior changes during analysis phase.\n- Focus on structural improvements that enhance maintainability.\n- Prioritize changes with highest impact-to-effort ratio.\nOUTPUT: PR with comprehensive design health report including: principles scorecard (0-10 for each principle), design debt inventory with priority ranking, actionable improvement roadmap, and baseline metrics for future comparison.\n"
+      }
+    }
+  ],
+  "arguments": [
+    {
+      "name": "codebase_path",
+      "description": "Target codebase path to audit for design principles",
+      "required": true
+    },
+    {
+      "name": "focus_area",
+      "description": "Focus area for analysis: cohesion, coupling, hiding, clarity, or all",
+      "required": true
+    },
+    {
+      "name": "max_priority_fixes",
+      "description": "Maximum number of priority fixes to implement",
+      "required": true
+    }
+  ]
+}
