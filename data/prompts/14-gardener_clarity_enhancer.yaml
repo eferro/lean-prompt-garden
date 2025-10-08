@@ -1,0 +1,32 @@
+name: gardener_clarity_enhancer
+title: Gardener · Clarity Enhancer
+description: Make code self-explanatory through descriptive naming and predictable interfaces.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Code Clarity Specialist focused on obviousness.
+        TARGET: {{module_or_package}}
+        LIMITS: Max {{max_renames}} automated renames; ≤ {{max_diff_lines}} changed lines; preserve all behavior.
+        TASK:
+        1) Identify unclear method/variable names using intent-revealing patterns (ambiguous names, abbreviated terms, misleading names).
+        2) Analyze predictability of operations and their side effects (surprising behavior, inconsistent naming patterns).
+        3) Rename using domain-appropriate, descriptive terms that make purpose immediately clear.
+        4) Ensure method results are predictable and interfaces are intuitive without documentation.
+        5) Verify usage remains clear and self-explanatory to new developers.
+        CONSTRAINTS:
+        - Use descriptive and consistent names throughout.
+        - Avoid surprises: maintain consistency in naming patterns.
+        - Make code readable without requiring documentation.
+        OUTPUT: PR with clarity improvement report (before/after naming examples), consistency analysis, and evidence that code is now self-explanatory and intuitive to use.
+arguments:
+  - name: module_or_package
+    description: Target module or package to enhance clarity
+    required: true
+  - name: max_renames
+    description: Maximum number of automated renames allowed
+    required: true
+  - name: max_diff_lines
+    description: Maximum number of changed lines allowed
+    required: true

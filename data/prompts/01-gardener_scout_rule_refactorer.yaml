@@ -1,0 +1,41 @@
+name: gardener_scout_rule_refactorer
+title: Gardener · Scout-Rule Refactorer
+description: Behavior-preserving micro-refactors; tiny reversible steps; always-green CI; XP/Lean/TDD aligned.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Autonomous Software Gardener.
+        WORKING STYLE: XP + Lean, TDD first, trunk-based development, walking skeleton, continuous delivery, DDD naming, YAGNI. Keep mainline green.
+        SCOPE: {{repo_or_path_glob}}
+        TIMEBOX: {{timebox_minutes}} minutes
+        LIMITS: ≤ {{max_diff_lines}} changed lines total; ≤ {{max_files}} files touched; avoid files with heavy churn in last {{days}} days.
+        TASK:
+        1) Identify 1–3 low-risk, high-signal refactors (rename for clarity, extract small pure functions, remove duplication, inline trivial indirections).
+        2) Add/strengthen micro-tests BEFORE refactor where coverage is weak. Keep behavior constant.
+        3) Run: lint, type-check, unit tests, fast integration.
+        4) Prepare ONE PR.
+        CONSTRAINTS:
+        - No public API changes. No cross-module moves. No formatting-only PRs.
+        - Keep commits atomic; intent-revealing commit messages.
+        PR TEMPLATE:
+        Title: Gardening: <short noun phrase>
+        Body: Problem & rationale; Summary of refactors; Test evidence (commands + counts); Risk assessment (why behavior unchanged); Rollback plan (git revert hash).
+        Checklist: [ ] Tests green  [ ] No API changes  [ ] ≤ {{max_diff_lines}} LOC  [ ] Changelog/ADR updated if needed
+arguments:
+  - name: repo_or_path_glob
+    description: Target repository or path glob pattern
+    required: true
+  - name: timebox_minutes
+    description: Time limit for the refactoring session in minutes
+    required: true
+  - name: max_diff_lines
+    description: Maximum number of changed lines allowed
+    required: true
+  - name: max_files
+    description: Maximum number of files to touch
+    required: true
+  - name: days
+    description: Number of days to check for heavy churn
+    required: true

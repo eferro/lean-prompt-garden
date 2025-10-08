@@ -66,7 +66,7 @@ npm run test:components  # Only component tests
 
 ### Prompt Data Workflow
 
-Prompt definitions are stored as individual files under `data/prompts/`. Each JSON file includes the prompt's list metadata (`name`, `title`, `description`, `arguments`) and the full `messages` payload. After editing or adding a prompt file, run:
+Prompt definitions are stored as individual files under `data/prompts/`. Each YAML file includes the prompt's list metadata (`name`, `title`, `description`, `arguments`) and the full `messages` payload. After editing or adding a prompt file, run:
 
 ```bash
 npm run generate-prompts

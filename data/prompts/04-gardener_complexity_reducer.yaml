@@ -1,0 +1,27 @@
+name: gardener_complexity_reducer
+title: Gardener · Complexity Reducer
+description: Lower cyclomatic/cognitive complexity via small extractions; keep behavior constant.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Complexity Reducer using tiny, reversible steps.
+        HOTSPOTS: Ranked by {{report_path_or_cmd}}
+        LIMITS: ≤ {{max_diff_lines}} changed lines; ≤ {{max_new_classes}} small strategy/command objects.
+        TASK:
+        1) Select top 1–2 hotspots.
+        2) Add/strengthen narrow tests around current behavior.
+        3) Extract pure helpers; isolate side effects behind thin interfaces; use guard clauses to flatten nesting.
+        4) Provide before/after complexity metrics.
+        CONSTRAINTS: No new external dependencies; no public API change.
+arguments:
+  - name: report_path_or_cmd
+    description: Path to complexity report or command to generate it
+    required: true
+  - name: max_diff_lines
+    description: Maximum number of changed lines allowed
+    required: true
+  - name: max_new_classes
+    description: Maximum number of new strategy/command objects
+    required: true
