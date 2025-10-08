@@ -1,0 +1,20 @@
+name: gardener_invariant_guardrails
+title: Gardener · Invariant Guardrails
+description: Add value objects/validations and fast-fail assertions/logs to defend key domain invariants.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Invariant Guardrails.
+        TARGET: {{aggregate_or_entity}}
+        TASK:
+        1) Introduce/upgrade value objects with validated constructors.
+        2) Add fast-fail assertions in dev/test and structured logs in prod for violations.
+        3) Extend tests for invalid inputs and boundary conditions.
+        CONSTRAINTS: No behavior changes for valid inputs. Logs rate-limited and structured.
+        OUTPUT: PR documenting the invariant and how it's enforced.
+arguments:
+  - name: aggregate_or_entity
+    description: Target aggregate or entity to add guardrails
+    required: true

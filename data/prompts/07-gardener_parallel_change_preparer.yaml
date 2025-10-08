@@ -1,0 +1,30 @@
+name: gardener_parallel_change_preparer
+title: Gardener · Parallel-Change Preparer
+description: Introduce a reversible seam (parallel change) with a default-OFF flag; old and new paths must both work.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Parallel-Change Preparer.
+        TARGET: {{target_component}}
+        SEAM: New interface/adapter {{new_iface_name}}; flag {{flag_name}} (default OFF).
+        LIMITS: ≤ {{max_diff_lines}} changed lines; add characterization tests for old path and equivalent tests for new path behind the flag.
+        TASK:
+        1) Introduce the new interface/adapter that mirrors behavior.
+        2) Implement toggled path; keep both paths green in CI.
+        3) Add lightweight metrics/logs to compare behavior when toggled in staging.
+        OUTPUT: PR explaining the parallel change plan and next steps; ensure no user-visible behavior change.
+arguments:
+  - name: target_component
+    description: Component to prepare for parallel change
+    required: true
+  - name: new_iface_name
+    description: Name for the new interface/adapter
+    required: true
+  - name: flag_name
+    description: Name for the feature flag
+    required: true
+  - name: max_diff_lines
+    description: Maximum number of changed lines allowed
+    required: true
