@@ -135,8 +135,18 @@ describe('Design Prompts Copy-to-Clipboard', () => {
       expect(consoleErrorSpy).toHaveBeenCalledWith('Failed to copy:', expect.any(Error));
     });
 
-    // Button should remain as "Copy Prompt" since copy failed
-    expect(screen.getByText('Copy Prompt')).toBeInTheDocument();
+    // Button should show error state
+    await waitFor(() => {
+      expect(screen.getByText('Copy failed')).toBeInTheDocument();
+    });
+
+    // Error should clear after timeout and return to "Copy Prompt"
+    await waitFor(
+      () => {
+        expect(screen.getByText('Copy Prompt')).toBeInTheDocument();
+      },
+      { timeout: 3000 }
+    );
 
     consoleErrorSpy.mockRestore();
   });

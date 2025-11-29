@@ -25,6 +25,53 @@
 - [ ] Error handling flows - network errors, missing prompts
 - [ ] URL routing tests - navigation between pages
 
+## Production Reliability Fixes (High Priority)
+
+### 1. Error Boundary — Prevent White Screen of Death
+- ✅ Create `ErrorBoundary` component that catches React errors
+- ✅ Test: ErrorBoundary displays fallback UI when child throws
+- ✅ Test: ErrorBoundary logs error details for debugging
+- ✅ Test: ErrorBoundary provides "Try Again" action
+- ✅ Wrap App with ErrorBoundary in main.tsx
+
+### 2. Route Parameter Guard — Fix Undefined Name Crash
+- ✅ Test: PromptDetail redirects to home when name param is undefined
+- ✅ Test: PromptDetail redirects to home when name param is empty string
+- ✅ Remove non-null assertion (`name!`) and add proper guard
+
+### 3. Clipboard Feedback — User-Visible Error States
+- ✅ Test: Copy button shows error state when clipboard API fails
+- ✅ Test: Copy button shows error state when clipboard not available
+- ✅ Test: Error state clears after timeout
+- [ ] Add fallback for insecure contexts (show text selection modal)
+
+### 4. Configuration Extraction — Remove Hardcoded Paths
+- ✅ Create `src/config.ts` with base path configuration
+- ✅ Test: Config returns correct path for production environment
+- ✅ Test: Config returns correct path for development environment
+- ✅ Replace hardcoded paths in usePrompts, usePromptDetail, main.tsx
+
+## Production Reliability Fixes (Medium Priority)
+
+### 5. Empty Messages Guard — Prevent Empty Clipboard Copy
+- [ ] Test: Copy extracts text from first text-type message
+- [ ] Test: Copy shows warning when no copyable text found
+- [ ] Test: Copy handles resource-type content appropriately
+
+### 6. JSON Validation — Runtime Safety for Fetched Data
+- [ ] Create validation utility for PromptData structure
+- [ ] Test: Validation rejects missing prompts array
+- [ ] Test: Validation rejects malformed prompt objects
+- [ ] Apply validation in usePrompts and usePromptDetail hooks
+
+## Production Reliability Fixes (Low Priority)
+
+### 7. Retry Mechanism — Network Resilience
+- [ ] Test: Hook retries fetch on transient failure
+- [ ] Test: Hook respects max retry limit
+- [ ] Test: Error state shows "Retry" button after max retries
+- [ ] Add retry logic to usePrompts and usePromptDetail
+
 ## Software Design Prompts (New Features)
 
 ### Design Quality Prompts (High Priority)

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import type { PromptDefinition, PromptData } from '../types/prompt'
+import { getPromptsUrl } from '../config'
 
 interface UsePromptDetailResult {
   prompt: PromptDefinition | null
@@ -18,8 +19,7 @@ export function usePromptDetail(name: string): UsePromptDetailResult {
         setLoading(true)
         setError(null)
         
-        const basePath = process.env.NODE_ENV === 'production' ? '/lean-prompt-garden/' : '/'
-        const response = await fetch(basePath + 'prompts.json')
+        const response = await fetch(getPromptsUrl())
         if (!response.ok) {
           throw new Error(`Failed to load prompts: ${response.statusText}`)
         }

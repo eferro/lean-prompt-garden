@@ -28,6 +28,20 @@ const renderWithRouter = (promptName: string) => {
     <MemoryRouter initialEntries={[`/prompt/${promptName}`]}>
       <Routes>
         <Route path="/prompt/:name" element={<PromptDetail />} />
+        <Route path="/" element={<div data-testid="home-page">Home Page</div>} />
+      </Routes>
+    </MemoryRouter>
+  )
+}
+
+// Helper to render with specific initial path (for edge cases)
+const renderWithPath = (path: string) => {
+  return render(
+    <MemoryRouter initialEntries={[path]}>
+      <Routes>
+        <Route path="/prompt/:name" element={<PromptDetail />} />
+        <Route path="/prompt" element={<PromptDetail />} />
+        <Route path="/" element={<div data-testid="home-page">Home Page</div>} />
       </Routes>
     </MemoryRouter>
   )
@@ -172,5 +186,74 @@ describe('PromptDetail Page', () => {
 
     // Should call usePromptDetail with the prompt name from URL
     expect(mockedUsePromptDetail).toHaveBeenCalledWith('test-prompt')
+  })
+
+  describe('Route Parameter Guard', () => {
+    it('should redirect to home when name param is undefined', () => {
+      renderWithPath('/prompt')
+
+      // Should redirect to home page
+      expect(screen.getByTestId('home-page')).toBeInTheDocument()
+    })
+
+    it('should redirect to home when name param is empty string', () => {
+      // Empty name in URL path
+      renderWithPath('/prompt/')
+
+      // Should redirect to home page  
+      expect(screen.getByTestId('home-page')).toBeInTheDocument()
+    })
+  })
+
+  describe('Clipboard Feedback', () => {
+    it('should show error state when clipboard API fails', async () => {
+      const mockedUsePromptDetail = vi.mocked(usePromptDetailModule.usePromptDetail)
+      mockedUsePromptDetail.mockReturnValue({
+        prompt: mockPrompt,
+        loading: false,
+        error: null,
+      })
+
+      // Mock clipboard to reject
+      vi.mocked(navigator.clipboard.writeText).mockRejectedValueOnce(new Error('Clipboard failed'))
+
+      renderWithRouter('clean-code')
+
+      const copyButton = screen.getByText('Copy Prompt')
+      fireEvent.click(copyButton)
+
+      await waitFor(() => {
+        expect(screen.getByText('Copy failed')).toBeInTheDocument()
+      })
+    })
+
+    it('should clear error state after timeout', async () => {
+      const mockedUsePromptDetail = vi.mocked(usePromptDetailModule.usePromptDetail)
+      mockedUsePromptDetail.mockReturnValue({
+        prompt: mockPrompt,
+        loading: false,
+        error: null,
+      })
+
+      // Mock clipboard to reject
+      vi.mocked(navigator.clipboard.writeText).mockRejectedValueOnce(new Error('Clipboard failed'))
+
+      renderWithRouter('clean-code')
+
+      const copyButton = screen.getByText('Copy Prompt')
+      fireEvent.click(copyButton)
+
+      await waitFor(() => {
+        expect(screen.getByText('Copy failed')).toBeInTheDocument()
+      })
+
+      // Error should clear after timeout
+      await waitFor(
+        () => {
+          expect(screen.getByText('Copy Prompt')).toBeInTheDocument()
+        },
+        { timeout: 3000 }
+      )
+    })
   })
 })

@@ -1,17 +1,24 @@
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, Navigate } from 'react-router-dom'
 import { useState } from 'react'
 import { 
   ArrowLeftIcon, 
   CheckIcon,
-  ClipboardDocumentIcon 
+  ClipboardDocumentIcon,
+  ExclamationTriangleIcon
 } from '@heroicons/react/24/outline'
 import { usePromptDetail } from '../../hooks/usePromptDetail'
 import PromptRenderer from '../../components/PromptRenderer'
 
 export default function PromptDetail() {
-  const { name } = useParams<{ name: string }>()
-  const { prompt, loading, error } = usePromptDetail(name!)
+  const { name = '' } = useParams<{ name: string }>()
+  const { prompt, loading, error } = usePromptDetail(name)
   const [copied, setCopied] = useState(false)
+  const [copyError, setCopyError] = useState(false)
+
+  // Guard: redirect to home if name is missing or empty
+  if (!name || name.trim() === '') {
+    return <Navigate to="/" replace />
+  }
 
   const handleCopyPrompt = async () => {
     if (!prompt) return
@@ -21,9 +28,13 @@ export default function PromptDetail() {
     try {
       await navigator.clipboard.writeText(text)
       setCopied(true)
+      setCopyError(false)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
       console.error('Failed to copy:', err)
+      setCopyError(true)
+      setCopied(false)
+      setTimeout(() => setCopyError(false), 2000)
     }
   }
 
@@ -66,9 +77,18 @@ export default function PromptDetail() {
         
         <button
           onClick={handleCopyPrompt}
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className={`inline-flex items-center px-3 py-2 text-sm font-medium text-white border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+            copyError 
+              ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500'
+              : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500'
+          }`}
         >
-          {copied ? (
+          {copyError ? (
+            <>
+              <ExclamationTriangleIcon className="mr-2 h-4 w-4" />
+              Copy failed
+            </>
+          ) : copied ? (
             <>
               <CheckIcon className="mr-2 h-4 w-4" />
               Copied!
