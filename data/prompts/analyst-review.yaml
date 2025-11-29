@@ -1,6 +1,8 @@
 name: analyst_review
 title: Analyst · Code Review
 description: XP-style review of pending changes. Tests, maintainability, project rules.
+categories:
+  - Analyst
 messages:
   - role: user
     content:

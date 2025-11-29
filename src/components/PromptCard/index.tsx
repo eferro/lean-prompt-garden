@@ -22,6 +22,18 @@ export default function PromptCard({ prompt }: PromptCardProps) {
         </div>
 
         <div className="flex items-center justify-end mt-4 pt-4 border-t border-gray-100">
+          {prompt.categories && prompt.categories.length > 0 && (
+            <div className="flex-1 flex flex-wrap gap-2">
+              {prompt.categories.map((category) => (
+                <span
+                  key={category}
+                  className="inline-flex items-center rounded-full bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700"
+                >
+                  {category}
+                </span>
+              ))}
+            </div>
+          )}
           <Link
             to={`/prompt/${prompt.name}`}
             className="inline-flex items-center px-3 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 border border-transparent rounded-md hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"

@@ -1,6 +1,8 @@
 name: gardener_simplify
 title: Gardener · Simplify
 description: Reduce complexity via small extractions. Keep behavior constant.
+categories:
+  - Gardener
 messages:
   - role: user
     content:

@@ -1,6 +1,8 @@
 name: planner_mikado
 title: Planner · Mikado Method
 description: Break complex changes into safe, incremental steps.
+categories:
+  - Planner
 messages:
   - role: user
     content:

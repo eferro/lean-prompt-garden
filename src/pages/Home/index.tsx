@@ -3,22 +3,24 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import PromptCard from '../../components/PromptCard'
 import SearchBox from '../../components/SearchBox'
 import { usePrompts } from '../../hooks/usePrompts'
+import { filterPrompts } from '../../utils/filterPrompts'
 
 export default function Home() {
   const { prompts, loading, error } = usePrompts()
   const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+
+  const categories = useMemo(() => {
+    const categorySet = new Set<string>()
+    prompts.forEach((prompt) => {
+      prompt.categories?.forEach((category) => categorySet.add(category))
+    })
+    return Array.from(categorySet).sort()
+  }, [prompts])
 
   const filteredPrompts = useMemo(() => {
-    if (!searchQuery) return prompts
-
-    const query = searchQuery.toLowerCase()
-    return prompts.filter(
-      (prompt) =>
-        prompt.title.toLowerCase().includes(query) ||
-        prompt.description.toLowerCase().includes(query) ||
-        prompt.name.toLowerCase().includes(query)
-    )
-  }, [prompts, searchQuery])
+    return filterPrompts(prompts, searchQuery, selectedCategory)
+  }, [prompts, searchQuery, selectedCategory])
 
   if (loading) {
     return (
@@ -46,6 +48,38 @@ export default function Home() {
           placeholder="Search prompts by name, title, or description..."
         />
       </div>
+
+      {/* Category filters */}
+      {categories.length > 0 && (
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="text-sm text-gray-600">Quick filter:</span>
+          <button
+            type="button"
+            onClick={() => setSelectedCategory(null)}
+            className={`rounded-full px-4 py-1 text-sm font-medium transition-colors border ${
+              selectedCategory === null
+                ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
+                : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+            }`}
+          >
+            All categories
+          </button>
+          {categories.map((category) => (
+            <button
+              type="button"
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`rounded-full px-4 py-1 text-sm font-medium transition-colors border ${
+                selectedCategory === category
+                  ? 'bg-indigo-600 text-white border-indigo-600'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Stats */}
       <div className="text-center">

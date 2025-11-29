@@ -1,6 +1,8 @@
 name: gardener_prune
 title: Gardener · Prune
 description: Remove dead code and small duplications with evidence.
+categories:
+  - Gardener
 messages:
   - role: user
     content:

@@ -1,6 +1,8 @@
 name: gardener_upgrade
 title: Gardener · Upgrade
 description: Safe dependency upgrades. One at a time. Full test cycle.
+categories:
+  - Gardener
 messages:
   - role: user
     content:

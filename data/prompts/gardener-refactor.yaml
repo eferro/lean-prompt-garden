@@ -1,6 +1,8 @@
 name: gardener_refactor
 title: Gardener · Refactor
 description: Small, safe, behavior-preserving micro-refactors. Scout rule.
+categories:
+  - Gardener
 messages:
   - role: user
     content:

@@ -1,6 +1,8 @@
 name: analyst_risks
 title: Analyst · Predict Risks
 description: Predict where code is likely to fail in production.
+categories:
+  - Analyst
 messages:
   - role: user
     content:

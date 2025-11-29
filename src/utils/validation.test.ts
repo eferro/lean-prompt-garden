@@ -6,13 +6,19 @@ describe('validatePromptData', () => {
   it('should return valid data when structure is correct', () => {
     const validData: PromptData = {
       prompts: [
-        { name: 'test', title: 'Test', description: 'A test prompt' }
+        {
+          name: 'test',
+          title: 'Test',
+          description: 'A test prompt',
+          categories: ['Example']
+        }
       ],
       definitions: {
         test: {
           name: 'test',
           title: 'Test',
           description: 'A test prompt',
+          categories: ['Example'],
           messages: []
         }
       }
@@ -68,6 +74,25 @@ describe('validatePromptData', () => {
       .toThrow(ValidationError)
     expect(() => validatePromptData(invalidData as unknown as PromptData))
       .toThrow('Invalid prompt at index 0: missing required field')
+  })
+
+  it('should throw ValidationError when categories is not an array of strings', () => {
+    const invalidData = {
+      prompts: [
+        {
+          name: 'test',
+          title: 'Test',
+          description: 'A test prompt',
+          categories: ['Valid', 123]
+        }
+      ],
+      definitions: {}
+    }
+
+    expect(() => validatePromptData(invalidData as unknown as PromptData))
+      .toThrow(ValidationError)
+    expect(() => validatePromptData(invalidData as unknown as PromptData))
+      .toThrow('Invalid prompt at index 0: categories must be an array of strings')
   })
 
   it('should return empty prompts array when valid but empty', () => {

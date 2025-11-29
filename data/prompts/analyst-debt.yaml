@@ -1,6 +1,8 @@
 name: analyst_debt
 title: Analyst · Technical Debt
 description: Identify and prioritize technical debt by ROI.
+categories:
+  - Analyst
 messages:
   - role: user
     content:
