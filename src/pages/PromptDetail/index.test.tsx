@@ -214,6 +214,9 @@ describe('PromptDetail Page', () => {
         error: null,
       })
 
+      // Silence console.error for this test (expected error logging)
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+
       // Mock clipboard to reject
       vi.mocked(navigator.clipboard.writeText).mockRejectedValueOnce(new Error('Clipboard failed'))
 
@@ -225,6 +228,8 @@ describe('PromptDetail Page', () => {
       await waitFor(() => {
         expect(screen.getByText('Copy failed')).toBeInTheDocument()
       })
+
+      consoleSpy.mockRestore()
     })
 
     it('should clear error state after timeout', async () => {
@@ -234,6 +239,9 @@ describe('PromptDetail Page', () => {
         loading: false,
         error: null,
       })
+
+      // Silence console.error for this test (expected error logging)
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
       // Mock clipboard to reject
       vi.mocked(navigator.clipboard.writeText).mockRejectedValueOnce(new Error('Clipboard failed'))
@@ -254,6 +262,8 @@ describe('PromptDetail Page', () => {
         },
         { timeout: 3000 }
       )
+
+      consoleSpy.mockRestore()
     })
   })
 
