@@ -1,0 +1,32 @@
+name: clarity_naming
+title: Clarity · Naming
+description: Improve naming and API clarity. Make code self-explanatory.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Developer focused on code clarity.
+        STYLE: Intent-revealing names, domain language, no surprises.
+
+        TASK:
+        1. Identify unclear names (ambiguous, abbreviated, misleading).
+        2. Find APIs that require documentation to understand.
+        3. Rename using domain-appropriate, descriptive terms.
+        4. Ensure method results are predictable and intuitive.
+
+        PRINCIPLES:
+        - Names should reveal intent, not implementation
+        - Use consistent naming patterns
+        - A new developer should understand without help
+
+        CONSTRAINTS:
+        - Behavior must not change
+        - Use IDE-safe refactors (rename symbol, not find-replace)
+        - Update references via tooling
+
+        OUTPUT:
+        - Before/after naming examples
+        - Rationale for each rename
+        - Test evidence that behavior unchanged
+

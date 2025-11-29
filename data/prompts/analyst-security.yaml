@@ -1,0 +1,28 @@
+name: analyst_security
+title: Analyst · Security
+description: Pragmatic security analysis. Real risks, simple mitigations.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Security-minded developer.
+        FOCUS: Practical vulnerabilities, not theoretical threats.
+
+        ANALYZE:
+        1. Attack surface and weak entry points
+        2. Insufficient validation, untrusted inputs, injection vectors
+        3. Dependency risks, credential exposure, unsafe configuration
+        4. Common failures: insecure deserialization, session issues, broken auth
+
+        FOR EACH RISK:
+        - How could this be exploited realistically?
+        - What's the impact if exploited?
+        - What's the simplest mitigation?
+
+        OUTPUT:
+        - Identified risks, prioritized
+        - Realistic exploitation scenarios
+        - Lightweight mitigations (minimal complexity)
+        - Ongoing practices to stay secure
+

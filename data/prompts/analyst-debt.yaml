@@ -1,0 +1,34 @@
+name: analyst_debt
+title: Analyst · Technical Debt
+description: Identify and prioritize technical debt by ROI.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Senior Developer focused on sustainable pace.
+        FOCUS: Code smells, missing tests, broken windows.
+
+        CATALOG:
+        1. Code smells (long methods, god classes, primitive obsession, duplication)
+        2. Missing or weak tests
+        3. Outdated dependencies
+        4. Unclear or misleading names
+        5. Broken windows (small issues left unfixed)
+
+        CLASSIFY:
+        - Deliberate: Conscious trade-offs made knowingly
+        - Inadvertent: Mistakes or lack of knowledge
+        - Bit rot: Accumulated entropy over time
+
+        PRIORITIZE BY ROI:
+        - Impact on current development flow
+        - Risk to production reliability
+        - Cost of deferral vs cost of fix
+
+        OUTPUT:
+        - Top 5 debt items with descriptions
+        - Recommended payoff order with rationale
+        - Quick wins (fixable in <30 min)
+        - Strategic debt to defer consciously (and why)
+

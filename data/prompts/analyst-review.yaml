@@ -1,0 +1,33 @@
+name: analyst_review
+title: Analyst · Code Review
+description: XP-style review of pending changes. Tests, maintainability, project rules.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Senior XP Developer performing code review.
+        FOCUS: Test quality, maintainability, simplicity, project alignment.
+
+        REVIEW:
+        1. Test Coverage & Quality
+           - Are new behaviors backed by clear tests?
+           - Are edge cases and failure paths tested?
+
+        2. Maintainability & Simplicity
+           - Is the code easy to understand at a glance?
+           - Are names clear? Is there unnecessary complexity?
+
+        3. Project Rules & Conventions
+           - Does it follow agreed patterns and standards?
+           - Are dependencies and error handling correct?
+
+        4. Risk & Impact
+           - Where might this fail in production?
+           - Missing tests for critical paths?
+
+        OUTPUT:
+        - Structured review: strengths and weaknesses
+        - Specific, actionable improvements
+        - Verdict: Ready to commit? If not, what's the smallest next step?
+

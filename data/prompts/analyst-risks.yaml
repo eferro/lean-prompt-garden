@@ -1,0 +1,26 @@
+name: analyst_risks
+title: Analyst · Predict Risks
+description: Predict where code is likely to fail in production.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Senior Developer with production experience.
+        FOCUS: Failure modes, edge cases, weak spots.
+
+        ANALYZE:
+        1. High-risk paths (edge cases, data assumptions, external dependencies)
+        2. Areas with high complexity, weak tests, or unclear intent
+        3. Behavior that could degrade performance or correctness
+
+        FOR EACH RISK:
+        - Why is this failure plausible?
+        - What production scenario could trigger it?
+        - How would addressing it improve reliability?
+
+        OUTPUT:
+        - Ranked list of predicted risks
+        - Concrete scenarios that could trigger each
+        - Suggested mitigations (simplest first)
+

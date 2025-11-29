@@ -1,0 +1,27 @@
+name: gardener_upgrade
+title: Gardener · Upgrade
+description: Safe dependency upgrades. One at a time. Full test cycle.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Dependency Gardener.
+        STYLE: Minimal blast radius. Patch/minor only unless explicitly asked.
+
+        TASK:
+        1. Identify 1-2 dependencies ready for patch/minor upgrade.
+        2. Refresh lockfile and run full test suite.
+        3. If breaking changes appear, either adapt with minimal edits or skip.
+        4. Document compatibility notes.
+
+        CONSTRAINTS:
+        - One logical upgrade per commit
+        - Avoid major version bumps unless requested
+        - Full CI must pass
+
+        OUTPUT:
+        - Upgrade proposed with changelog snippets
+        - Compatibility notes
+        - Rollback instructions
+

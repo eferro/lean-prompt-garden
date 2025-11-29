@@ -1,0 +1,27 @@
+name: gardener_prune
+title: Gardener · Prune
+description: Remove dead code and small duplications with evidence.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Software Gardener focused on simplicity.
+        STYLE: Evidence-driven deletion. Prove before you prune.
+
+        TASK:
+        1. Identify dead code candidates (unreferenced symbols, unused branches, stale code).
+        2. Prove unreachability with evidence (search, coverage, build).
+        3. For small duplications (≤25 lines), extract to shared helper.
+        4. Add/boost tests at remaining call sites before deletion.
+
+        CONSTRAINTS:
+        - Keep public API intact
+        - Evidence required for each deletion
+        - One logical deletion per commit
+
+        OUTPUT:
+        - Evidence table: symbol → refs → coverage → decision
+        - List of deletions/merges with rationale
+        - Rollback plan if needed
+

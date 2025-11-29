@@ -1,759 +1,213 @@
 {
   "prompts": [
     {
-      "name": "gardener_scout_rule_refactorer",
-      "title": "Gardener · Scout-Rule Refactorer",
-      "description": "Behavior-preserving micro-refactors; tiny reversible steps; always-green CI; XP/Lean/TDD aligned.",
-      "arguments": [
-        {
-          "name": "repo_or_path_glob",
-          "description": "Target repository or path glob pattern",
-          "required": true
-        },
-        {
-          "name": "timebox_minutes",
-          "description": "Time limit for the refactoring session in minutes",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        },
-        {
-          "name": "max_files",
-          "description": "Maximum number of files to touch",
-          "required": true
-        },
-        {
-          "name": "days",
-          "description": "Number of days to check for heavy churn",
-          "required": true
-        }
-      ]
+      "name": "analyst_debt",
+      "title": "Analyst · Technical Debt",
+      "description": "Identify and prioritize technical debt by ROI."
     },
     {
-      "name": "gardener_naming_api_clarity",
-      "title": "Gardener · Naming & API Clarity",
-      "description": "DDD-aligned naming, value objects, and intent-revealing APIs without behavior change.",
-      "arguments": [
-        {
-          "name": "module_or_path",
-          "description": "Target module or path to refactor",
-          "required": true
-        },
-        {
-          "name": "max_renames",
-          "description": "Maximum number of automated renames allowed",
-          "required": true
-        }
-      ]
+      "name": "analyst_review",
+      "title": "Analyst · Code Review",
+      "description": "XP-style review of pending changes. Tests, maintainability, project rules."
     },
     {
-      "name": "gardener_deadcode_dup_pruner",
-      "title": "Gardener · Dead Code & Duplication Pruner",
-      "description": "Evidence-driven deletion and tiny DRY merges with strict safety gates.",
-      "arguments": [
-        {
-          "name": "paths",
-          "description": "Target paths to analyze for dead code",
-          "required": true
-        },
-        {
-          "name": "coverage_cmd",
-          "description": "Command to check coverage/runtime",
-          "required": true
-        },
-        {
-          "name": "stale_days",
-          "description": "Git inactivity threshold in days",
-          "required": true
-        },
-        {
-          "name": "max_deleted_lines",
-          "description": "Maximum number of lines to delete",
-          "required": true
-        }
-      ]
+      "name": "analyst_risks",
+      "title": "Analyst · Predict Risks",
+      "description": "Predict where code is likely to fail in production."
     },
     {
-      "name": "gardener_complexity_reducer",
-      "title": "Gardener · Complexity Reducer",
-      "description": "Lower cyclomatic/cognitive complexity via small extractions; keep behavior constant.",
-      "arguments": [
-        {
-          "name": "report_path_or_cmd",
-          "description": "Path to complexity report or command to generate it",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        },
-        {
-          "name": "max_new_classes",
-          "description": "Maximum number of new strategy/command objects",
-          "required": true
-        }
-      ]
+      "name": "analyst_security",
+      "title": "Analyst · Security",
+      "description": "Pragmatic security analysis. Real risks, simple mitigations."
     },
     {
-      "name": "gardener_test_suite_gardener",
-      "title": "Gardener · Test Gardener",
-      "description": "Strengthen tests first; eliminate flakiness and reduce runtime without losing signal.",
-      "arguments": [
-        {
-          "name": "test_paths",
-          "description": "Target test paths to improve",
-          "required": true
-        },
-        {
-          "name": "runtime_pct",
-          "description": "Target percentage reduction in runtime",
-          "required": true
-        }
-      ]
+      "name": "clarity_naming",
+      "title": "Clarity · Naming",
+      "description": "Improve naming and API clarity. Make code self-explanatory."
     },
     {
-      "name": "gardener_dependency_gardener",
-      "title": "Gardener · Dependency Gardener",
-      "description": "Safe micro-upgrades (patch/minor), one logical upgrade per PR, full CI + smoke check and explicit rollback.",
-      "arguments": [
-        {
-          "name": "manifest_path_or_list",
-          "description": "Path to package manifest or list of dependencies",
-          "required": true
-        },
-        {
-          "name": "smoke_cmd",
-          "description": "Command to run smoke tests",
-          "required": true
-        }
-      ]
+      "name": "gardener_prune",
+      "title": "Gardener · Prune",
+      "description": "Remove dead code and small duplications with evidence."
     },
     {
-      "name": "gardener_parallel_change_preparer",
-      "title": "Gardener · Parallel-Change Preparer",
-      "description": "Introduce a reversible seam (parallel change) with a default-OFF flag; old and new paths must both work.",
-      "arguments": [
-        {
-          "name": "target_component",
-          "description": "Component to prepare for parallel change",
-          "required": true
-        },
-        {
-          "name": "new_iface_name",
-          "description": "Name for the new interface/adapter",
-          "required": true
-        },
-        {
-          "name": "flag_name",
-          "description": "Name for the feature flag",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        }
-      ]
+      "name": "gardener_refactor",
+      "title": "Gardener · Refactor",
+      "description": "Small, safe, behavior-preserving micro-refactors. Scout rule."
     },
     {
-      "name": "gardener_boundary_clarifier",
-      "title": "Gardener · Boundary Clarifier",
-      "description": "Tighten domain/infra boundaries using ports/adapters with minimal code movement.",
-      "arguments": [
-        {
-          "name": "domain_module",
-          "description": "Target domain module to clarify boundaries",
-          "required": true
-        }
-      ]
+      "name": "gardener_simplify",
+      "title": "Gardener · Simplify",
+      "description": "Reduce complexity via small extractions. Keep behavior constant."
     },
     {
-      "name": "gardener_invariant_guardrails",
-      "title": "Gardener · Invariant Guardrails",
-      "description": "Add value objects/validations and fast-fail assertions/logs to defend key domain invariants.",
-      "arguments": [
-        {
-          "name": "aggregate_or_entity",
-          "description": "Target aggregate or entity to add guardrails",
-          "required": true
-        }
-      ]
+      "name": "gardener_upgrade",
+      "title": "Gardener · Upgrade",
+      "description": "Safe dependency upgrades. One at a time. Full test cycle."
     },
     {
-      "name": "gardener_fitness_functions",
-      "title": "Gardener · Fitness-Function Writer",
-      "description": "Codify small architectural rules as fast checks/tests and wire them into CI.",
-      "arguments": [
-        {
-          "name": "tooling_choice",
-          "description": "Tooling to use for implementing fitness functions",
-          "required": true
-        },
-        {
-          "name": "tooling_path",
-          "description": "Path to place the fitness function tooling",
-          "required": true
-        }
-      ]
+      "name": "planner_coverage",
+      "title": "Planner · Test Coverage",
+      "description": "Plan and write tests for untested code. Behavior-focused."
     },
     {
-      "name": "gardener_cohesion_analyzer",
-      "title": "Gardener · Cohesion Analyzer",
-      "description": "Identify components with mixed responsibilities and extract secondary concerns.",
-      "arguments": [
-        {
-          "name": "module_or_class_path",
-          "description": "Target module or class to analyze for cohesion issues",
-          "required": true
-        },
-        {
-          "name": "max_extractions",
-          "description": "Maximum number of extracted components allowed",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "gardener_coupling_reducer",
-      "title": "Gardener · Coupling Reducer",
-      "description": "Reduce inter-module dependencies through interfaces and dependency injection.",
-      "arguments": [
-        {
-          "name": "high_coupling_module",
-          "description": "Target module with tight coupling to analyze and refactor",
-          "required": true
-        },
-        {
-          "name": "max_interfaces",
-          "description": "Maximum number of new interfaces to introduce",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "gardener_encapsulation_strengthener",
-      "title": "Gardener · Encapsulation Strengthener",
-      "description": "Hide internal details behind meaningful operations and behavior-focused interfaces.",
-      "arguments": [
-        {
-          "name": "component_path",
-          "description": "Target component to strengthen encapsulation",
-          "required": true
-        },
-        {
-          "name": "max_new_methods",
-          "description": "Maximum number of new public methods to introduce",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "gardener_clarity_enhancer",
-      "title": "Gardener · Clarity Enhancer",
-      "description": "Make code self-explanatory through descriptive naming and predictable interfaces.",
-      "arguments": [
-        {
-          "name": "module_or_package",
-          "description": "Target module or package to enhance clarity",
-          "required": true
-        },
-        {
-          "name": "max_renames",
-          "description": "Maximum number of automated renames allowed",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "gardener_design_principles_auditor",
-      "title": "Gardener · Design Principles Auditor",
-      "description": "Comprehensive design health check using cohesion, coupling, encapsulation, and clarity principles.",
-      "arguments": [
-        {
-          "name": "codebase_path",
-          "description": "Target codebase path to audit for design principles",
-          "required": true
-        },
-        {
-          "name": "focus_area",
-          "description": "Focus area for analysis: cohesion, coupling, hiding, clarity, or all",
-          "required": true
-        },
-        {
-          "name": "max_priority_fixes",
-          "description": "Maximum number of priority fixes to implement",
-          "required": true
-        }
-      ]
+      "name": "planner_mikado",
+      "title": "Planner · Mikado Method",
+      "description": "Break complex changes into safe, incremental steps."
     }
   ],
   "definitions": {
-    "gardener_scout_rule_refactorer": {
-      "name": "gardener_scout_rule_refactorer",
-      "title": "Gardener · Scout-Rule Refactorer",
-      "description": "Behavior-preserving micro-refactors; tiny reversible steps; always-green CI; XP/Lean/TDD aligned.",
+    "analyst_debt": {
+      "name": "analyst_debt",
+      "title": "Analyst · Technical Debt",
+      "description": "Identify and prioritize technical debt by ROI.",
       "messages": [
         {
           "role": "user",
           "content": {
             "type": "text",
-            "text": "ROLE: Autonomous Software Gardener.\nWORKING STYLE: XP + Lean, TDD first, trunk-based development, walking skeleton, continuous delivery, DDD naming, YAGNI. Keep mainline green.\nSCOPE: {{repo_or_path_glob}}\nTIMEBOX: {{timebox_minutes}} minutes\nLIMITS: ≤ {{max_diff_lines}} changed lines total; ≤ {{max_files}} files touched; avoid files with heavy churn in last {{days}} days.\nTASK:\n1) Identify 1–3 low-risk, high-signal refactors (rename for clarity, extract small pure functions, remove duplication, inline trivial indirections).\n2) Add/strengthen micro-tests BEFORE refactor where coverage is weak. Keep behavior constant.\n3) Run: lint, type-check, unit tests, fast integration.\n4) Prepare ONE PR.\nCONSTRAINTS:\n- No public API changes. No cross-module moves. No formatting-only PRs.\n- Keep commits atomic; intent-revealing commit messages.\nPR TEMPLATE:\nTitle: Gardening: <short noun phrase>\nBody: Problem & rationale; Summary of refactors; Test evidence (commands + counts); Risk assessment (why behavior unchanged); Rollback plan (git revert hash).\nChecklist: [ ] Tests green  [ ] No API changes  [ ] ≤ {{max_diff_lines}} LOC  [ ] Changelog/ADR updated if needed\n"
+            "text": "ROLE: Senior Developer focused on sustainable pace.\nFOCUS: Code smells, missing tests, broken windows.\n\nCATALOG:\n1. Code smells (long methods, god classes, primitive obsession, duplication)\n2. Missing or weak tests\n3. Outdated dependencies\n4. Unclear or misleading names\n5. Broken windows (small issues left unfixed)\n\nCLASSIFY:\n- Deliberate: Conscious trade-offs made knowingly\n- Inadvertent: Mistakes or lack of knowledge\n- Bit rot: Accumulated entropy over time\n\nPRIORITIZE BY ROI:\n- Impact on current development flow\n- Risk to production reliability\n- Cost of deferral vs cost of fix\n\nOUTPUT:\n- Top 5 debt items with descriptions\n- Recommended payoff order with rationale\n- Quick wins (fixable in <30 min)\n- Strategic debt to defer consciously (and why)\n"
           }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "repo_or_path_glob",
-          "description": "Target repository or path glob pattern",
-          "required": true
-        },
-        {
-          "name": "timebox_minutes",
-          "description": "Time limit for the refactoring session in minutes",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        },
-        {
-          "name": "max_files",
-          "description": "Maximum number of files to touch",
-          "required": true
-        },
-        {
-          "name": "days",
-          "description": "Number of days to check for heavy churn",
-          "required": true
         }
       ]
     },
-    "gardener_naming_api_clarity": {
-      "name": "gardener_naming_api_clarity",
-      "title": "Gardener · Naming & API Clarity",
-      "description": "DDD-aligned naming, value objects, and intent-revealing APIs without behavior change.",
+    "analyst_review": {
+      "name": "analyst_review",
+      "title": "Analyst · Code Review",
+      "description": "XP-style review of pending changes. Tests, maintainability, project rules.",
       "messages": [
         {
           "role": "user",
           "content": {
             "type": "text",
-            "text": "ROLE: XP/Lean Software Gardener focused on semantic clarity.\nTARGET: {{module_or_path}}\nLIMITS: Max automated renames ≤ {{max_renames}}. Behavior must not change.\nTASK:\n1) Detect 1–2 naming/API clarity issues (ambiguous method names, anemic value objects, mixed domain/infra terms).\n2) Write characterization tests if missing, then refactor names or extract value objects reflecting the ubiquitous language.\n3) Update references via IDE-safe/AST-safe refactors.\n4) Run unit → component → smoke tests.\nOUTPUT: Single PR including short domain glossary snippet, before/after examples, and test evidence. Avoid breaking external consumers.\n"
+            "text": "ROLE: Senior XP Developer performing code review.\nFOCUS: Test quality, maintainability, simplicity, project alignment.\n\nREVIEW:\n1. Test Coverage & Quality\n   - Are new behaviors backed by clear tests?\n   - Are edge cases and failure paths tested?\n\n2. Maintainability & Simplicity\n   - Is the code easy to understand at a glance?\n   - Are names clear? Is there unnecessary complexity?\n\n3. Project Rules & Conventions\n   - Does it follow agreed patterns and standards?\n   - Are dependencies and error handling correct?\n\n4. Risk & Impact\n   - Where might this fail in production?\n   - Missing tests for critical paths?\n\nOUTPUT:\n- Structured review: strengths and weaknesses\n- Specific, actionable improvements\n- Verdict: Ready to commit? If not, what's the smallest next step?\n"
           }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "module_or_path",
-          "description": "Target module or path to refactor",
-          "required": true
-        },
-        {
-          "name": "max_renames",
-          "description": "Maximum number of automated renames allowed",
-          "required": true
         }
       ]
     },
-    "gardener_deadcode_dup_pruner": {
-      "name": "gardener_deadcode_dup_pruner",
-      "title": "Gardener · Dead Code & Duplication Pruner",
-      "description": "Evidence-driven deletion and tiny DRY merges with strict safety gates.",
+    "analyst_risks": {
+      "name": "analyst_risks",
+      "title": "Analyst · Predict Risks",
+      "description": "Predict where code is likely to fail in production.",
       "messages": [
         {
           "role": "user",
           "content": {
             "type": "text",
-            "text": "ROLE: Software Gardener prioritizing simplicity and basal cost reduction.\nTARGET PATHS: {{paths}}\nEVIDENCE SOURCES: Coverage/Runtime via {{coverage_cmd}}; Git inactivity threshold {{stale_days}} days; static search (unreferenced symbols/branches).\nLIMITS: Max deletions ≤ {{max_deleted_lines}} lines; keep public API intact.\nTASK:\n1) Prove unreachability for dead code candidates (search/build/coverage evidence).\n2) Add/boost tests at remaining call sites to preserve behavior.\n3) Delete dead code or merge tiny duplications (≤ 25 lines each) via extract method.\nPR BODY must include an Evidence Table (symbol → refs → coverage → decision), risks, and rollback.\n"
+            "text": "ROLE: Senior Developer with production experience.\nFOCUS: Failure modes, edge cases, weak spots.\n\nANALYZE:\n1. High-risk paths (edge cases, data assumptions, external dependencies)\n2. Areas with high complexity, weak tests, or unclear intent\n3. Behavior that could degrade performance or correctness\n\nFOR EACH RISK:\n- Why is this failure plausible?\n- What production scenario could trigger it?\n- How would addressing it improve reliability?\n\nOUTPUT:\n- Ranked list of predicted risks\n- Concrete scenarios that could trigger each\n- Suggested mitigations (simplest first)\n"
           }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "paths",
-          "description": "Target paths to analyze for dead code",
-          "required": true
-        },
-        {
-          "name": "coverage_cmd",
-          "description": "Command to check coverage/runtime",
-          "required": true
-        },
-        {
-          "name": "stale_days",
-          "description": "Git inactivity threshold in days",
-          "required": true
-        },
-        {
-          "name": "max_deleted_lines",
-          "description": "Maximum number of lines to delete",
-          "required": true
         }
       ]
     },
-    "gardener_complexity_reducer": {
-      "name": "gardener_complexity_reducer",
-      "title": "Gardener · Complexity Reducer",
-      "description": "Lower cyclomatic/cognitive complexity via small extractions; keep behavior constant.",
+    "analyst_security": {
+      "name": "analyst_security",
+      "title": "Analyst · Security",
+      "description": "Pragmatic security analysis. Real risks, simple mitigations.",
       "messages": [
         {
           "role": "user",
           "content": {
             "type": "text",
-            "text": "ROLE: Complexity Reducer using tiny, reversible steps.\nHOTSPOTS: Ranked by {{report_path_or_cmd}}\nLIMITS: ≤ {{max_diff_lines}} changed lines; ≤ {{max_new_classes}} small strategy/command objects.\nTASK:\n1) Select top 1–2 hotspots.\n2) Add/strengthen narrow tests around current behavior.\n3) Extract pure helpers; isolate side effects behind thin interfaces; use guard clauses to flatten nesting.\n4) Provide before/after complexity metrics.\nCONSTRAINTS: No new external dependencies; no public API change.\n"
+            "text": "ROLE: Security-minded developer.\nFOCUS: Practical vulnerabilities, not theoretical threats.\n\nANALYZE:\n1. Attack surface and weak entry points\n2. Insufficient validation, untrusted inputs, injection vectors\n3. Dependency risks, credential exposure, unsafe configuration\n4. Common failures: insecure deserialization, session issues, broken auth\n\nFOR EACH RISK:\n- How could this be exploited realistically?\n- What's the impact if exploited?\n- What's the simplest mitigation?\n\nOUTPUT:\n- Identified risks, prioritized\n- Realistic exploitation scenarios\n- Lightweight mitigations (minimal complexity)\n- Ongoing practices to stay secure\n"
           }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "report_path_or_cmd",
-          "description": "Path to complexity report or command to generate it",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        },
-        {
-          "name": "max_new_classes",
-          "description": "Maximum number of new strategy/command objects",
-          "required": true
         }
       ]
     },
-    "gardener_test_suite_gardener": {
-      "name": "gardener_test_suite_gardener",
-      "title": "Gardener · Test Gardener",
-      "description": "Strengthen tests first; eliminate flakiness and reduce runtime without losing signal.",
+    "clarity_naming": {
+      "name": "clarity_naming",
+      "title": "Clarity · Naming",
+      "description": "Improve naming and API clarity. Make code self-explanatory.",
       "messages": [
         {
           "role": "user",
           "content": {
             "type": "text",
-            "text": "ROLE: Test Gardener.\nTARGET: {{test_paths}}\nGOAL: Reduce total test runtime by ≥ {{runtime_pct}}% and remove flaky patterns.\nTASK:\n1) Identify 1–2 brittle/slow tests (sleep/polling, network/file I/O, shared mutable state).\n2) Introduce seams (ports/adapters) to stub external systems; prefer table-driven or property-based tests for pure logic.\n3) Replace broad E2E checks with focused component tests where appropriate; add missing edge-case tests; remove redundant overlaps.\nOUTPUT: PR with runtime before/after, flakiness notes, and evidence that coverage/signal did not regress.\n"
+            "text": "ROLE: Developer focused on code clarity.\nSTYLE: Intent-revealing names, domain language, no surprises.\n\nTASK:\n1. Identify unclear names (ambiguous, abbreviated, misleading).\n2. Find APIs that require documentation to understand.\n3. Rename using domain-appropriate, descriptive terms.\n4. Ensure method results are predictable and intuitive.\n\nPRINCIPLES:\n- Names should reveal intent, not implementation\n- Use consistent naming patterns\n- A new developer should understand without help\n\nCONSTRAINTS:\n- Behavior must not change\n- Use IDE-safe refactors (rename symbol, not find-replace)\n- Update references via tooling\n\nOUTPUT:\n- Before/after naming examples\n- Rationale for each rename\n- Test evidence that behavior unchanged\n"
           }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "test_paths",
-          "description": "Target test paths to improve",
-          "required": true
-        },
-        {
-          "name": "runtime_pct",
-          "description": "Target percentage reduction in runtime",
-          "required": true
         }
       ]
     },
-    "gardener_dependency_gardener": {
-      "name": "gardener_dependency_gardener",
-      "title": "Gardener · Dependency Gardener",
-      "description": "Safe micro-upgrades (patch/minor), one logical upgrade per PR, full CI + smoke check and explicit rollback.",
+    "gardener_prune": {
+      "name": "gardener_prune",
+      "title": "Gardener · Prune",
+      "description": "Remove dead code and small duplications with evidence.",
       "messages": [
         {
           "role": "user",
           "content": {
             "type": "text",
-            "text": "ROLE: Dependency Gardener.\nTARGET: {{manifest_path_or_list}}\nSMOKE: {{smoke_cmd}}\nTASK:\n1) Propose 1–2 patch/minor upgrades with the lowest blast radius.\n2) Refresh lockfile; run full tests and smoke deployment/runtime.\n3) If breaking changes appear, either adapt with minimal edits or skip; avoid majors unless explicitly allowed.\nOUTPUT: One PR per logical upgrade with changelog snippets, compatibility notes, and rollback instructions.\n"
+            "text": "ROLE: Software Gardener focused on simplicity.\nSTYLE: Evidence-driven deletion. Prove before you prune.\n\nTASK:\n1. Identify dead code candidates (unreferenced symbols, unused branches, stale code).\n2. Prove unreachability with evidence (search, coverage, build).\n3. For small duplications (≤25 lines), extract to shared helper.\n4. Add/boost tests at remaining call sites before deletion.\n\nCONSTRAINTS:\n- Keep public API intact\n- Evidence required for each deletion\n- One logical deletion per commit\n\nOUTPUT:\n- Evidence table: symbol → refs → coverage → decision\n- List of deletions/merges with rationale\n- Rollback plan if needed\n"
           }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "manifest_path_or_list",
-          "description": "Path to package manifest or list of dependencies",
-          "required": true
-        },
-        {
-          "name": "smoke_cmd",
-          "description": "Command to run smoke tests",
-          "required": true
         }
       ]
     },
-    "gardener_parallel_change_preparer": {
-      "name": "gardener_parallel_change_preparer",
-      "title": "Gardener · Parallel-Change Preparer",
-      "description": "Introduce a reversible seam (parallel change) with a default-OFF flag; old and new paths must both work.",
+    "gardener_refactor": {
+      "name": "gardener_refactor",
+      "title": "Gardener · Refactor",
+      "description": "Small, safe, behavior-preserving micro-refactors. Scout rule.",
       "messages": [
         {
           "role": "user",
           "content": {
             "type": "text",
-            "text": "ROLE: Parallel-Change Preparer.\nTARGET: {{target_component}}\nSEAM: New interface/adapter {{new_iface_name}}; flag {{flag_name}} (default OFF).\nLIMITS: ≤ {{max_diff_lines}} changed lines; add characterization tests for old path and equivalent tests for new path behind the flag.\nTASK:\n1) Introduce the new interface/adapter that mirrors behavior.\n2) Implement toggled path; keep both paths green in CI.\n3) Add lightweight metrics/logs to compare behavior when toggled in staging.\nOUTPUT: PR explaining the parallel change plan and next steps; ensure no user-visible behavior change.\n"
+            "text": "ROLE: Software Gardener.\nSTYLE: XP + Lean, TDD first, trunk-based, YAGNI. Keep mainline green.\n\nTASK:\n1. Identify 1-3 low-risk, high-value refactors (rename for clarity, extract small pure functions, remove duplication, inline trivial indirections).\n2. Add/strengthen tests BEFORE refactoring if coverage is weak.\n3. Make small, reversible changes. Keep behavior constant.\n4. Run tests after each change.\n\nCONSTRAINTS:\n- No public API changes\n- No cross-module moves\n- Keep commits atomic\n- Intent-revealing commit messages\n\nOUTPUT:\n- Proposed refactors with rationale\n- Risk assessment (why behavior unchanged)\n- Ready to commit or next step needed\n"
           }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "target_component",
-          "description": "Component to prepare for parallel change",
-          "required": true
-        },
-        {
-          "name": "new_iface_name",
-          "description": "Name for the new interface/adapter",
-          "required": true
-        },
-        {
-          "name": "flag_name",
-          "description": "Name for the feature flag",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
         }
       ]
     },
-    "gardener_boundary_clarifier": {
-      "name": "gardener_boundary_clarifier",
-      "title": "Gardener · Boundary Clarifier",
-      "description": "Tighten domain/infra boundaries using ports/adapters with minimal code movement.",
+    "gardener_simplify": {
+      "name": "gardener_simplify",
+      "title": "Gardener · Simplify",
+      "description": "Reduce complexity via small extractions. Keep behavior constant.",
       "messages": [
         {
           "role": "user",
           "content": {
             "type": "text",
-            "text": "ROLE: Boundary Clarifier (DDD).\nTARGET DOMAIN MODULE: {{domain_module}}\nTASK:\n1) Identify a direct infra call inside domain logic.\n2) Wrap it behind a port interface; move infra details to an adapter.\n3) Add tests at the port boundary; stub the adapter in domain tests.\nCONSTRAINTS: No schema/API changes. One boundary at a time. Max new types: 1 interface + 1 adapter.\nOUTPUT: PR with mini-ADR: context, decision, consequences.\n"
+            "text": "ROLE: Complexity Reducer.\nSTYLE: Tiny, reversible steps. Flatten nesting. Extract pure helpers.\n\nTASK:\n1. Identify the most complex hotspot in context (high cyclomatic/cognitive complexity).\n2. Add/strengthen narrow tests around current behavior.\n3. Apply simplifications: guard clauses, extract method, isolate side effects.\n4. Provide before/after complexity assessment.\n\nCONSTRAINTS:\n- No new external dependencies\n- No public API changes\n- Keep behavior constant\n\nOUTPUT:\n- Hotspot identified with complexity reason\n- Simplification applied\n- Before/after comparison\n"
           }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "domain_module",
-          "description": "Target domain module to clarify boundaries",
-          "required": true
         }
       ]
     },
-    "gardener_invariant_guardrails": {
-      "name": "gardener_invariant_guardrails",
-      "title": "Gardener · Invariant Guardrails",
-      "description": "Add value objects/validations and fast-fail assertions/logs to defend key domain invariants.",
+    "gardener_upgrade": {
+      "name": "gardener_upgrade",
+      "title": "Gardener · Upgrade",
+      "description": "Safe dependency upgrades. One at a time. Full test cycle.",
       "messages": [
         {
           "role": "user",
           "content": {
             "type": "text",
-            "text": "ROLE: Invariant Guardrails.\nTARGET: {{aggregate_or_entity}}\nTASK:\n1) Introduce/upgrade value objects with validated constructors.\n2) Add fast-fail assertions in dev/test and structured logs in prod for violations.\n3) Extend tests for invalid inputs and boundary conditions.\nCONSTRAINTS: No behavior changes for valid inputs. Logs rate-limited and structured.\nOUTPUT: PR documenting the invariant and how it's enforced.\n"
+            "text": "ROLE: Dependency Gardener.\nSTYLE: Minimal blast radius. Patch/minor only unless explicitly asked.\n\nTASK:\n1. Identify 1-2 dependencies ready for patch/minor upgrade.\n2. Refresh lockfile and run full test suite.\n3. If breaking changes appear, either adapt with minimal edits or skip.\n4. Document compatibility notes.\n\nCONSTRAINTS:\n- One logical upgrade per commit\n- Avoid major version bumps unless requested\n- Full CI must pass\n\nOUTPUT:\n- Upgrade proposed with changelog snippets\n- Compatibility notes\n- Rollback instructions\n"
           }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "aggregate_or_entity",
-          "description": "Target aggregate or entity to add guardrails",
-          "required": true
         }
       ]
     },
-    "gardener_fitness_functions": {
-      "name": "gardener_fitness_functions",
-      "title": "Gardener · Fitness-Function Writer",
-      "description": "Codify small architectural rules as fast checks/tests and wire them into CI.",
+    "planner_coverage": {
+      "name": "planner_coverage",
+      "title": "Planner · Test Coverage",
+      "description": "Plan and write tests for untested code. Behavior-focused.",
       "messages": [
         {
           "role": "user",
           "content": {
             "type": "text",
-            "text": "ROLE: Fitness-Function Writer.\nTOOLING: {{tooling_choice}}\nLOCATION: {{tooling_path}}\nTASK:\n1) Add 1–2 narrowly-scoped rules (examples: 'domain cannot import infra', 'no network calls in unit tests', 'max function length 60').\n2) Implement with the chosen tooling and integrate into CI.\n3) Provide guided suppressions for legacy files with TODO expiry dates.\nOUTPUT: PR with rule descriptions, rationale, and remediation guidance; include failing-example reproduction and how to fix.\n"
+            "text": "ROLE: Senior Developer improving test coverage.\nSTYLE: Small batches, behavior-focused tests, production reliability.\n\nTASK:\n1. Identify untested code paths (functions, branches, edge cases).\n2. Prioritize by risk and production impact.\n3. Write one focused test for the most valuable untested path.\n\nFOR EACH TEST:\n- Why does this untested path matter?\n- Which failure does it help prevent?\n- How does it support simpler, more evolvable code?\n\nCONSTRAINTS:\n- Test behavior, not implementation\n- Keep tests small, clear, intention-revealing\n- One test at a time\n\nOUTPUT:\n- Untested paths identified with priority\n- Test written for highest-priority path\n- Next test to write after this one\n"
           }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "tooling_choice",
-          "description": "Tooling to use for implementing fitness functions",
-          "required": true
-        },
-        {
-          "name": "tooling_path",
-          "description": "Path to place the fitness function tooling",
-          "required": true
         }
       ]
     },
-    "gardener_cohesion_analyzer": {
-      "name": "gardener_cohesion_analyzer",
-      "title": "Gardener · Cohesion Analyzer",
-      "description": "Identify components with mixed responsibilities and extract secondary concerns.",
+    "planner_mikado": {
+      "name": "planner_mikado",
+      "title": "Planner · Mikado Method",
+      "description": "Break complex changes into safe, incremental steps.",
       "messages": [
         {
           "role": "user",
           "content": {
             "type": "text",
-            "text": "ROLE: Software Gardener specialized in cohesion analysis.\nTARGET: {{module_or_class_path}}\nLIMITS: Max {{max_extractions}} extracted components; ≤ {{max_diff_lines}} changed lines total.\nTASK:\n1) Analyze component for single responsibility violations (mixed domains, unrelated methods, functions that seem out of place).\n2) Identify secondary responsibilities that can be extracted into focused components.\n3) Add characterization tests before extraction to preserve behavior.\n4) Extract mixed concerns using small, reversible steps (extract method → extract class).\n5) Validate isolation: can each component be tested independently?\nCONSTRAINTS:\n- Keep behavior constant; no public API changes.\n- Consistent naming to maintain cohesion within extracted components.\n- Avoid cross-module dependencies in extractions.\nOUTPUT: PR with cohesion analysis report (before/after responsibility matrix), extracted components list, and test evidence that behavior is preserved.\n"
+            "text": "ROLE: Senior Developer applying the Mikado Method.\nSTYLE: Try → fail → note prerequisites → revert → solve leaves first.\n\nPROCESS:\n1. Define the Goal\n   - What is the desired end state?\n   - What does \"done\" look like?\n\n2. Naive Attempt\n   - Try to make the change directly.\n   - Note what breaks (compilation, tests, runtime).\n   - Each failure is a prerequisite to solve first.\n\n3. Build the Graph\n   - For each prerequisite, recursively apply the method.\n   - Continue until you find leaf nodes (no further prerequisites).\n\n4. Execute from Leaves\n   - Start from leaves, work toward the goal.\n   - Each step: implement → test → commit.\n\nRULES:\n- Always revert failed attempts. Never leave broken code.\n- Commit leaf nodes immediately.\n- If a node feels too big, break it down further.\n\nOUTPUT:\n- Goal statement\n- Dependency graph (text or visual)\n- Leaf nodes: first changes to make now\n- Next single smallest step\n"
           }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "module_or_class_path",
-          "description": "Target module or class to analyze for cohesion issues",
-          "required": true
-        },
-        {
-          "name": "max_extractions",
-          "description": "Maximum number of extracted components allowed",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        }
-      ]
-    },
-    "gardener_coupling_reducer": {
-      "name": "gardener_coupling_reducer",
-      "title": "Gardener · Coupling Reducer",
-      "description": "Reduce inter-module dependencies through interfaces and dependency injection.",
-      "messages": [
-        {
-          "role": "user",
-          "content": {
-            "type": "text",
-            "text": "ROLE: Decoupling Specialist using ports/adapters pattern.\nTARGET: {{high_coupling_module}}\nLIMITS: Max {{max_interfaces}} new interfaces; ≤ {{max_diff_lines}} changed lines; behavior must remain unchanged.\nTASK:\n1) Identify tight coupling points using static analysis (direct imports, shared data structures, concrete dependencies).\n2) Introduce interfaces to break direct dependencies between modules.\n3) Implement dependency injection where beneficial for testability and flexibility.\n4) Replace shared data structures with defined contracts/interfaces.\n5) Add isolation tests at new boundaries to verify decoupling.\nCONSTRAINTS:\n- Keep behavior constant; no public API changes.\n- Avoid sharing data structures between modules.\n- Test each module in isolation after decoupling.\nOUTPUT: PR with coupling metrics report (before/after dependency graph), interface definitions, and test evidence demonstrating improved isolation.\n"
-          }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "high_coupling_module",
-          "description": "Target module with tight coupling to analyze and refactor",
-          "required": true
-        },
-        {
-          "name": "max_interfaces",
-          "description": "Maximum number of new interfaces to introduce",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        }
-      ]
-    },
-    "gardener_encapsulation_strengthener": {
-      "name": "gardener_encapsulation_strengthener",
-      "title": "Gardener · Encapsulation Strengthener",
-      "description": "Hide internal details behind meaningful operations and behavior-focused interfaces.",
-      "messages": [
-        {
-          "role": "user",
-          "content": {
-            "type": "text",
-            "text": "ROLE: Encapsulation Guardian focused on information hiding.\nTARGET: {{component_path}}\nLIMITS: No public API breaking changes; ≤ {{max_new_methods}} new public methods; ≤ {{max_diff_lines}} changed lines.\nTASK:\n1) Audit exposed internals vs actual usage patterns (getters/setters exposing state, public fields, implementation details).\n2) Replace data accessors with behavior-focused operations that show intention, not implementation.\n3) Hide implementation details behind abstractions that protect against future changes.\n4) Make internal state private and provide meaningful operations instead of raw data access.\n5) Validate no external consumers break after encapsulation improvements.\nCONSTRAINTS:\n- Show intention, not implementation in public interfaces.\n- Minimize exposure as much as possible while maintaining functionality.\n- Prefer meaningful operations over raw data access.\nOUTPUT: PR with API surface analysis (before/after exposure metrics), encapsulation improvements list, and test evidence that external usage patterns remain valid.\n"
-          }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "component_path",
-          "description": "Target component to strengthen encapsulation",
-          "required": true
-        },
-        {
-          "name": "max_new_methods",
-          "description": "Maximum number of new public methods to introduce",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        }
-      ]
-    },
-    "gardener_clarity_enhancer": {
-      "name": "gardener_clarity_enhancer",
-      "title": "Gardener · Clarity Enhancer",
-      "description": "Make code self-explanatory through descriptive naming and predictable interfaces.",
-      "messages": [
-        {
-          "role": "user",
-          "content": {
-            "type": "text",
-            "text": "ROLE: Code Clarity Specialist focused on obviousness.\nTARGET: {{module_or_package}}\nLIMITS: Max {{max_renames}} automated renames; ≤ {{max_diff_lines}} changed lines; preserve all behavior.\nTASK:\n1) Identify unclear method/variable names using intent-revealing patterns (ambiguous names, abbreviated terms, misleading names).\n2) Analyze predictability of operations and their side effects (surprising behavior, inconsistent naming patterns).\n3) Rename using domain-appropriate, descriptive terms that make purpose immediately clear.\n4) Ensure method results are predictable and interfaces are intuitive without documentation.\n5) Verify usage remains clear and self-explanatory to new developers.\nCONSTRAINTS:\n- Use descriptive and consistent names throughout.\n- Avoid surprises: maintain consistency in naming patterns.\n- Make code readable without requiring documentation.\nOUTPUT: PR with clarity improvement report (before/after naming examples), consistency analysis, and evidence that code is now self-explanatory and intuitive to use.\n"
-          }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "module_or_package",
-          "description": "Target module or package to enhance clarity",
-          "required": true
-        },
-        {
-          "name": "max_renames",
-          "description": "Maximum number of automated renames allowed",
-          "required": true
-        },
-        {
-          "name": "max_diff_lines",
-          "description": "Maximum number of changed lines allowed",
-          "required": true
-        }
-      ]
-    },
-    "gardener_design_principles_auditor": {
-      "name": "gardener_design_principles_auditor",
-      "title": "Gardener · Design Principles Auditor",
-      "description": "Comprehensive design health check using cohesion, coupling, encapsulation, and clarity principles.",
-      "messages": [
-        {
-          "role": "user",
-          "content": {
-            "type": "text",
-            "text": "ROLE: Design Health Inspector using proven design principles.\nTARGET: {{codebase_path}}\nFOCUS: {{focus_area}} (cohesion|coupling|hiding|clarity|all)\nLIMITS: Max {{max_priority_fixes}} priority fixes; behavior must remain unchanged.\nTASK:\n1) Run comprehensive design analysis using the four core principles:\n   - COHESION: Does each module have a single clear responsibility?\n   - COUPLING: How much does each part depend on the rest of the system?\n   - INFORMATION HIDING: Are we exposing only what is necessary?\n   - OBVIOUS SYSTEM: Does the code explain itself?\n2) Apply the design health checklist to sample key components:\n   - Does each module have a clear purpose?\n   - Could I change this without breaking half the system?\n   - Am I exposing the minimum necessary?\n   - Would a new team member understand this without help?\n3) Identify top {{max_priority_fixes}} design debt items with concrete examples and measurable impact.\n4) Provide actionable remediation plan with effort estimates and risk assessment.\nCONSTRAINTS:\n- No behavior changes during analysis phase.\n- Focus on structural improvements that enhance maintainability.\n- Prioritize changes with highest impact-to-effort ratio.\nOUTPUT: PR with comprehensive design health report including: principles scorecard (0-10 for each principle), design debt inventory with priority ranking, actionable improvement roadmap, and baseline metrics for future comparison.\n"
-          }
-        }
-      ],
-      "arguments": [
-        {
-          "name": "codebase_path",
-          "description": "Target codebase path to audit for design principles",
-          "required": true
-        },
-        {
-          "name": "focus_area",
-          "description": "Focus area for analysis: cohesion, coupling, hiding, clarity, or all",
-          "required": true
-        },
-        {
-          "name": "max_priority_fixes",
-          "description": "Maximum number of priority fixes to implement",
-          "required": true
         }
       ]
     }

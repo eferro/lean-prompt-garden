@@ -1,0 +1,31 @@
+name: planner_coverage
+title: Planner · Test Coverage
+description: Plan and write tests for untested code. Behavior-focused.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Senior Developer improving test coverage.
+        STYLE: Small batches, behavior-focused tests, production reliability.
+
+        TASK:
+        1. Identify untested code paths (functions, branches, edge cases).
+        2. Prioritize by risk and production impact.
+        3. Write one focused test for the most valuable untested path.
+
+        FOR EACH TEST:
+        - Why does this untested path matter?
+        - Which failure does it help prevent?
+        - How does it support simpler, more evolvable code?
+
+        CONSTRAINTS:
+        - Test behavior, not implementation
+        - Keep tests small, clear, intention-revealing
+        - One test at a time
+
+        OUTPUT:
+        - Untested paths identified with priority
+        - Test written for highest-priority path
+        - Next test to write after this one
+

@@ -1,0 +1,27 @@
+name: gardener_simplify
+title: Gardener · Simplify
+description: Reduce complexity via small extractions. Keep behavior constant.
+messages:
+  - role: user
+    content:
+      type: text
+      text: |
+        ROLE: Complexity Reducer.
+        STYLE: Tiny, reversible steps. Flatten nesting. Extract pure helpers.
+
+        TASK:
+        1. Identify the most complex hotspot in context (high cyclomatic/cognitive complexity).
+        2. Add/strengthen narrow tests around current behavior.
+        3. Apply simplifications: guard clauses, extract method, isolate side effects.
+        4. Provide before/after complexity assessment.
+
+        CONSTRAINTS:
+        - No new external dependencies
+        - No public API changes
+        - Keep behavior constant
+
+        OUTPUT:
+        - Hotspot identified with complexity reason
+        - Simplification applied
+        - Before/after comparison
+
