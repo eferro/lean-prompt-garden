@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import type { Prompt, PromptData } from '../types/prompt'
+import type { Prompt } from '../types/prompt'
 import { getPromptsUrl } from '../config'
+import { validatePromptData } from '../utils/validation'
 
 interface UsePromptsResult {
   prompts: Prompt[]
@@ -24,7 +25,8 @@ export function usePrompts(): UsePromptsResult {
           throw new Error(`Failed to load prompts: ${response.statusText}`)
         }
         
-        const data: PromptData = await response.json()
+        const rawData = await response.json()
+        const data = validatePromptData(rawData)
         setPrompts(data.prompts)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load prompts')

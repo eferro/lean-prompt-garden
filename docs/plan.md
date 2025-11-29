@@ -54,15 +54,15 @@
 ## Production Reliability Fixes (Medium Priority)
 
 ### 5. Empty Messages Guard — Prevent Empty Clipboard Copy
-- [ ] Test: Copy extracts text from first text-type message
-- [ ] Test: Copy shows warning when no copyable text found
-- [ ] Test: Copy handles resource-type content appropriately
+- ✅ Test: Copy extracts text from first text-type message
+- ✅ Test: Copy shows warning when no copyable text found
+- ✅ Test: Copy handles resource-type content appropriately
 
 ### 6. JSON Validation — Runtime Safety for Fetched Data
-- [ ] Create validation utility for PromptData structure
-- [ ] Test: Validation rejects missing prompts array
-- [ ] Test: Validation rejects malformed prompt objects
-- [ ] Apply validation in usePrompts and usePromptDetail hooks
+- ✅ Create validation utility for PromptData structure
+- ✅ Test: Validation rejects missing prompts array
+- ✅ Test: Validation rejects malformed prompt objects
+- ✅ Apply validation in usePrompts and usePromptDetail hooks
 
 ## Production Reliability Fixes (Low Priority)
 

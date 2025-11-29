@@ -256,4 +256,68 @@ describe('PromptDetail Page', () => {
       )
     })
   })
+
+  describe('Empty Messages Guard', () => {
+    it('should show warning when prompt has empty messages array', async () => {
+      const emptyMessagesPrompt: PromptDefinition = {
+        name: 'empty-prompt',
+        title: 'Empty Prompt',
+        description: 'A prompt with no messages',
+        messages: [],
+      }
+
+      const mockedUsePromptDetail = vi.mocked(usePromptDetailModule.usePromptDetail)
+      mockedUsePromptDetail.mockReturnValue({
+        prompt: emptyMessagesPrompt,
+        loading: false,
+        error: null,
+      })
+
+      renderWithRouter('empty-prompt')
+
+      const copyButton = screen.getByText('Copy Prompt')
+      fireEvent.click(copyButton)
+
+      await waitFor(() => {
+        expect(screen.getByText('Nothing to copy')).toBeInTheDocument()
+      })
+    })
+
+    it('should show warning when first message has no text content', async () => {
+      const resourceOnlyPrompt: PromptDefinition = {
+        name: 'resource-prompt',
+        title: 'Resource Prompt',
+        description: 'A prompt with resource content only',
+        messages: [
+          {
+            role: 'user',
+            content: {
+              type: 'resource',
+              resource: {
+                uri: 'file://example.txt',
+                name: 'example.txt',
+                mimeType: 'text/plain',
+              },
+            },
+          },
+        ],
+      }
+
+      const mockedUsePromptDetail = vi.mocked(usePromptDetailModule.usePromptDetail)
+      mockedUsePromptDetail.mockReturnValue({
+        prompt: resourceOnlyPrompt,
+        loading: false,
+        error: null,
+      })
+
+      renderWithRouter('resource-prompt')
+
+      const copyButton = screen.getByText('Copy Prompt')
+      fireEvent.click(copyButton)
+
+      await waitFor(() => {
+        expect(screen.getByText('Nothing to copy')).toBeInTheDocument()
+      })
+    })
+  })
 })

@@ -14,6 +14,7 @@ export default function PromptDetail() {
   const { prompt, loading, error } = usePromptDetail(name)
   const [copied, setCopied] = useState(false)
   const [copyError, setCopyError] = useState(false)
+  const [nothingToCopy, setNothingToCopy] = useState(false)
 
   // Guard: redirect to home if name is missing or empty
   if (!name || name.trim() === '') {
@@ -25,15 +26,26 @@ export default function PromptDetail() {
 
     const text = prompt.messages[0]?.content?.text || ''
     
+    // Guard: check if there's actually text to copy
+    if (!text.trim()) {
+      setNothingToCopy(true)
+      setCopied(false)
+      setCopyError(false)
+      setTimeout(() => setNothingToCopy(false), 2000)
+      return
+    }
+    
     try {
       await navigator.clipboard.writeText(text)
       setCopied(true)
       setCopyError(false)
+      setNothingToCopy(false)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
       console.error('Failed to copy:', err)
       setCopyError(true)
       setCopied(false)
+      setNothingToCopy(false)
       setTimeout(() => setCopyError(false), 2000)
     }
   }
@@ -78,8 +90,8 @@ export default function PromptDetail() {
         <button
           onClick={handleCopyPrompt}
           className={`inline-flex items-center px-3 py-2 text-sm font-medium text-white border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-            copyError 
-              ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500'
+            copyError || nothingToCopy
+              ? 'bg-amber-600 hover:bg-amber-700 focus:ring-amber-500'
               : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500'
           }`}
         >
@@ -87,6 +99,11 @@ export default function PromptDetail() {
             <>
               <ExclamationTriangleIcon className="mr-2 h-4 w-4" />
               Copy failed
+            </>
+          ) : nothingToCopy ? (
+            <>
+              <ExclamationTriangleIcon className="mr-2 h-4 w-4" />
+              Nothing to copy
             </>
           ) : copied ? (
             <>
