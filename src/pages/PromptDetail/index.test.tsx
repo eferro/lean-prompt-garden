@@ -8,34 +8,9 @@ import * as usePromptDetailModule from '../../hooks/usePromptDetail'
 // Mock the hooks and components
 vi.mock('../../hooks/usePromptDetail')
 vi.mock('../../components/PromptRenderer', () => ({
-  default: ({ prompt, argumentValues }: { prompt: PromptDefinition; argumentValues: Record<string, string> }) => (
+  default: ({ prompt }: { prompt: PromptDefinition }) => (
     <div data-testid="prompt-renderer">
       <h3>Prompt: {prompt.title}</h3>
-      <p>Arguments: {JSON.stringify(argumentValues)}</p>
-    </div>
-  ),
-}))
-vi.mock('../../components/ArgumentsForm', () => ({
-  default: ({ 
-    arguments: args, 
-    values, 
-    onChange 
-  }: { 
-    arguments: any[]; 
-    values: Record<string, string>; 
-    onChange: (values: Record<string, string>) => void; 
-  }) => (
-    <div data-testid="arguments-form">
-      <h4>Arguments Form</h4>
-      {args.map((arg) => (
-        <input
-          key={arg.name}
-          data-testid={`arg-${arg.name}`}
-          value={values[arg.name] || ''}
-          onChange={(e) => onChange({ ...values, [arg.name]: e.target.value })}
-          placeholder={arg.name}
-        />
-      ))}
     </div>
   ),
 }))
@@ -68,20 +43,8 @@ describe('PromptDetail Page', () => {
         role: 'user',
         content: {
           type: 'text',
-          text: 'Apply clean code principles to {{code_snippet}}',
+          text: 'Apply clean code principles',
         },
-      },
-    ],
-    arguments: [
-      {
-        name: 'code_snippet',
-        description: 'The code to improve',
-        required: true,
-      },
-      {
-        name: 'language',
-        description: 'Programming language',
-        required: false,
       },
     ],
   }
@@ -147,43 +110,10 @@ describe('PromptDetail Page', () => {
     expect(screen.getByText('Clean Code Practices')).toBeInTheDocument()
     expect(screen.getByText('Guidelines for writing maintainable code')).toBeInTheDocument()
     expect(screen.getByText('clean-code')).toBeInTheDocument()
-    expect(screen.getByText('2 arguments')).toBeInTheDocument()
 
     // Should show navigation
     expect(screen.getByText('Back to prompts')).toBeInTheDocument()
     expect(screen.getByText('Copy Prompt')).toBeInTheDocument()
-  })
-
-  it('should render arguments form when prompt has arguments', () => {
-    const mockedUsePromptDetail = vi.mocked(usePromptDetailModule.usePromptDetail)
-    mockedUsePromptDetail.mockReturnValue({
-      prompt: mockPrompt,
-      loading: false,
-      error: null,
-    })
-
-    renderWithRouter('clean-code')
-
-    // Should show arguments form
-    expect(screen.getByTestId('arguments-form')).toBeInTheDocument()
-    expect(screen.getByTestId('arg-code_snippet')).toBeInTheDocument()
-    expect(screen.getByTestId('arg-language')).toBeInTheDocument()
-  })
-
-  it('should not render arguments form when prompt has no arguments', () => {
-    const promptWithoutArgs = { ...mockPrompt, arguments: [] }
-    const mockedUsePromptDetail = vi.mocked(usePromptDetailModule.usePromptDetail)
-    mockedUsePromptDetail.mockReturnValue({
-      prompt: promptWithoutArgs,
-      loading: false,
-      error: null,
-    })
-
-    renderWithRouter('clean-code')
-
-    // Should not show arguments form
-    expect(screen.queryByTestId('arguments-form')).not.toBeInTheDocument()
-    expect(screen.getByText('0 arguments')).toBeInTheDocument()
   })
 
   it('should render prompt content with PromptRenderer', () => {
@@ -201,29 +131,6 @@ describe('PromptDetail Page', () => {
     expect(screen.getByText('Prompt: Clean Code Practices')).toBeInTheDocument()
   })
 
-  it('should handle argument value changes and pass to PromptRenderer', async () => {
-    const mockedUsePromptDetail = vi.mocked(usePromptDetailModule.usePromptDetail)
-    mockedUsePromptDetail.mockReturnValue({
-      prompt: mockPrompt,
-      loading: false,
-      error: null,
-    })
-
-    renderWithRouter('clean-code')
-
-    // Change argument value
-    const codeSnippetInput = screen.getByTestId('arg-code_snippet')
-    fireEvent.change(codeSnippetInput, { target: { value: 'console.log("test")' } })
-
-    await waitFor(() => {
-      // Should update the input value
-      expect(screen.getByTestId('arg-code_snippet')).toHaveValue('console.log("test")')
-      
-      // Should pass updated arguments to PromptRenderer (JSON.stringify is in the output)
-      expect(screen.getByText(/code_snippet/)).toBeInTheDocument()
-    })
-  })
-
   it('should copy prompt to clipboard when copy button is clicked', async () => {
     const mockedUsePromptDetail = vi.mocked(usePromptDetailModule.usePromptDetail)
     mockedUsePromptDetail.mockReturnValue({
@@ -239,7 +146,7 @@ describe('PromptDetail Page', () => {
 
     await waitFor(() => {
       expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-        'Apply clean code principles to {{code_snippet}}'
+        'Apply clean code principles'
       )
       expect(screen.getByText('Copied!')).toBeInTheDocument()
     })

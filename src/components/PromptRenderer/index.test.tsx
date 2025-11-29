@@ -8,18 +8,16 @@ const samplePrompt: PromptDefinition = {
   title: 'Greet',
   description: 'greeting prompt',
   messages: [
-    { role: 'user', content: { type: 'text', text: 'Hello {{name}}' } },
-    { role: 'assistant', content: { type: 'text', text: 'Hi {{name}}, nice to meet you.' } }
+    { role: 'user', content: { type: 'text', text: 'Hello world' } },
+    { role: 'assistant', content: { type: 'text', text: 'Hi there, nice to meet you.' } }
   ]
 }
 
 describe('PromptRenderer', () => {
-  it('should render prompt content with arguments', () => {
-    const argumentValues = { name: 'Alice' }
+  it('should render prompt content', () => {
+    render(<PromptRenderer prompt={samplePrompt} />)
 
-    render(<PromptRenderer prompt={samplePrompt} argumentValues={argumentValues} />)
-
-    expect(screen.getByText('Hello Alice')).toBeInTheDocument()
-    expect(screen.getByText('Hi Alice, nice to meet you.')).toBeInTheDocument()
+    expect(screen.getByText('Hello world')).toBeInTheDocument()
+    expect(screen.getByText('Hi there, nice to meet you.')).toBeInTheDocument()
   })
 })

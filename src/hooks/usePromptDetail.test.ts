@@ -28,8 +28,7 @@ describe('usePromptDetail', () => {
           text: 'Hello world'
         }
       }
-    ],
-    arguments: []
+    ]
   }
 
   const mockData: PromptData = {
@@ -127,8 +126,7 @@ describe('usePromptDetail', () => {
       name: 'another-prompt',
       title: 'Another Prompt',
       description: 'Another test prompt',
-      messages: [],
-      arguments: []
+      messages: []
     }
 
     const updatedMockData: PromptData = {
@@ -162,52 +160,5 @@ describe('usePromptDetail', () => {
     })
 
     expect(mockFetch).toHaveBeenCalledTimes(2)
-  })
-
-  it('should combine arguments from prompts section with definition data', async () => {
-    const mockPromptDataWithArguments: PromptData = {
-      prompts: [
-        {
-          name: 'test-prompt-with-args',
-          title: 'Test Prompt With Args',
-          description: 'A test prompt with arguments',
-          arguments: [
-            { name: 'arg1', description: 'First argument', required: true },
-            { name: 'arg2', description: 'Second argument', required: false }
-          ]
-        }
-      ],
-      definitions: {
-        'test-prompt-with-args': {
-          name: 'test-prompt-with-args',
-          title: 'Test Prompt With Args',
-          description: 'A test prompt with arguments',
-          messages: [{ role: 'user', content: { type: 'text', text: 'Test message with {{arg1}} and {{arg2}}' } }]
-        }
-      }
-    }
-
-    mockFetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => mockPromptDataWithArguments
-    })
-
-    const { result } = renderHook(() => usePromptDetail('test-prompt-with-args'))
-
-    await waitFor(() => {
-      expect(result.current.loading).toBe(false)
-    })
-
-    expect(result.current.prompt).toEqual({
-      name: 'test-prompt-with-args',
-      title: 'Test Prompt With Args', 
-      description: 'A test prompt with arguments',
-      messages: [{ role: 'user', content: { type: 'text', text: 'Test message with {{arg1}} and {{arg2}}' } }],
-      arguments: [
-        { name: 'arg1', description: 'First argument', required: true },
-        { name: 'arg2', description: 'Second argument', required: false }
-      ]
-    })
-    expect(result.current.error).toBe(null)
   })
 })

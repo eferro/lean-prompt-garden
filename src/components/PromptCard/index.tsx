@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { DocumentDuplicateIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import type { Prompt } from '../../types/prompt'
 
 interface PromptCardProps {
@@ -7,8 +7,6 @@ interface PromptCardProps {
 }
 
 export default function PromptCard({ prompt }: PromptCardProps) {
-  const argumentCount = prompt.arguments?.length || 0
-
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
       <div className="p-6">
@@ -23,14 +21,7 @@ export default function PromptCard({ prompt }: PromptCardProps) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-          <div className="flex items-center space-x-4 text-sm text-gray-500">
-            <span className="flex items-center">
-              <DocumentDuplicateIcon className="h-4 w-4 mr-1" />
-              {argumentCount} {argumentCount === 1 ? 'argument' : 'arguments'}
-            </span>
-          </div>
-
+        <div className="flex items-center justify-end mt-4 pt-4 border-t border-gray-100">
           <Link
             to={`/prompt/${prompt.name}`}
             className="inline-flex items-center px-3 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 border border-transparent rounded-md hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"

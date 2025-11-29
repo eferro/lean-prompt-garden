@@ -2,31 +2,24 @@ import { useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
 import { 
   ArrowLeftIcon, 
-  DocumentDuplicateIcon, 
   CheckIcon,
   ClipboardDocumentIcon 
 } from '@heroicons/react/24/outline'
 import { usePromptDetail } from '../../hooks/usePromptDetail'
 import PromptRenderer from '../../components/PromptRenderer'
-import ArgumentsForm from '../../components/ArgumentsForm'
-import { renderPromptTemplate } from '../../utils/prompt'
 
 export default function PromptDetail() {
   const { name } = useParams<{ name: string }>()
   const { prompt, loading, error } = usePromptDetail(name!)
-  const [argumentValues, setArgumentValues] = useState<Record<string, string>>({})
   const [copied, setCopied] = useState(false)
 
   const handleCopyPrompt = async () => {
     if (!prompt) return
 
-    const renderedText = renderPromptTemplate(
-      prompt.messages[0]?.content?.text || '',
-      argumentValues
-    )
+    const text = prompt.messages[0]?.content?.text || ''
     
     try {
-      await navigator.clipboard.writeText(renderedText)
+      await navigator.clipboard.writeText(text)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
@@ -101,30 +94,14 @@ export default function PromptDetail() {
         </div>
 
         <div className="flex items-center text-sm text-gray-500">
-          <DocumentDuplicateIcon className="h-4 w-4 mr-1" />
-          <span className="mr-4">
-            {prompt.arguments?.length || 0} arguments
-          </span>
           <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded-md text-xs font-medium">
             {prompt.name}
           </span>
         </div>
       </div>
 
-      {/* Arguments Form */}
-      {prompt.arguments && prompt.arguments.length > 0 && (
-        <ArgumentsForm
-          arguments={prompt.arguments}
-          values={argumentValues}
-          onChange={setArgumentValues}
-        />
-      )}
-
       {/* Prompt Content */}
-      <PromptRenderer
-        prompt={prompt}
-        argumentValues={argumentValues}
-      />
+      <PromptRenderer prompt={prompt} />
     </div>
   )
 }

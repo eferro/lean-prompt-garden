@@ -1,34 +1,17 @@
 import { describe, it, expect } from 'vitest'
 import {
   validatePrompt,
-  validateArgument,
   filterPrompts,
   sortPrompts,
-  renderPromptTemplate,
 } from './prompt'
-import type { Prompt, PromptArgument } from '../types/prompt'
+import type { Prompt } from '../types/prompt'
 
 describe('validatePrompt', () => {
-  it('should return true for valid prompt without arguments', () => {
+  it('should return true for valid prompt', () => {
     const prompt: Prompt = {
       name: 'test-prompt',
       title: 'Test Prompt',
       description: 'A test prompt'
-    }
-
-    expect(validatePrompt(prompt)).toBe(true)
-  })
-
-  it('should return true for valid prompt with arguments', () => {
-    const prompt: Prompt = {
-      name: 'test-prompt',
-      title: 'Test Prompt',
-      description: 'A test prompt',
-      arguments: [{
-        name: 'input',
-        description: 'Input text',
-        required: true
-      }]
     }
 
     expect(validatePrompt(prompt)).toBe(true)
@@ -59,62 +42,6 @@ describe('validatePrompt', () => {
     } as Prompt
 
     expect(validatePrompt(prompt)).toBe(false)
-  })
-
-  it('should return false for prompt with invalid argument', () => {
-    const prompt: Prompt = {
-      name: 'test-prompt',
-      title: 'Test Prompt',
-      description: 'A test prompt',
-      arguments: [{
-        name: '',
-        description: 'Input text',
-        required: true
-      }]
-    }
-
-    expect(validatePrompt(prompt)).toBe(false)
-  })
-})
-
-
-describe('validateArgument', () => {
-  it('should return true for valid argument', () => {
-    const argument: PromptArgument = {
-      name: 'input',
-      description: 'Input text',
-      required: true
-    }
-
-    expect(validateArgument(argument)).toBe(true)
-  })
-
-  it('should return false for argument missing name', () => {
-    const argument = {
-      description: 'Input text',
-      required: true
-    } as PromptArgument
-
-    expect(validateArgument(argument)).toBe(false)
-  })
-
-  it('should return false for argument missing description', () => {
-    const argument = {
-      name: 'input',
-      required: true
-    } as PromptArgument
-
-    expect(validateArgument(argument)).toBe(false)
-  })
-
-  it('should return false for argument with invalid required field', () => {
-    const argument = {
-      name: 'input',
-      description: 'Input text',
-      required: 'yes' as any
-    } as PromptArgument
-
-    expect(validateArgument(argument)).toBe(false)
   })
 })
 
@@ -222,28 +149,5 @@ describe('sortPrompts', () => {
 
     const result = sortPrompts(mixedCasePrompts, 'title')
     expect(result.map(p => p.title)).toEqual(['A-title', 'b-title', 'z-title'])
-  })
-})
-
-describe('renderPromptTemplate', () => {
-  it('should replace placeholders with provided argument values', () => {
-    const template = 'Hello {{name}}'
-    const values = { name: 'Alice' }
-
-    expect(renderPromptTemplate(template, values)).toBe('Hello Alice')
-  })
-
-  it('should keep placeholders intact when argument is missing', () => {
-    const template = 'Hello {{name}} from {{city}}'
-    const values = { name: 'Alice' }
-
-    expect(renderPromptTemplate(template, values)).toBe('Hello Alice from {{city}}')
-  })
-
-  it('should replace repeated placeholders consistently', () => {
-    const template = '{{name}} meets {{name}}'
-    const values = { name: 'Bob' }
-
-    expect(renderPromptTemplate(template, values)).toBe('Bob meets Bob')
   })
 })

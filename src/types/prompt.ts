@@ -1,10 +1,4 @@
 // MCP-compatible prompt types
-export interface PromptArgument {
-  name: string
-  description: string
-  required: boolean
-}
-
 export interface PromptContent {
   type: 'text' | 'image' | 'audio' | 'resource'
   text?: string
@@ -29,14 +23,12 @@ export interface PromptDefinition {
   title: string
   description: string
   messages: PromptMessage[]
-  arguments?: PromptArgument[]
 }
 
 export interface Prompt {
   name: string
   title: string
   description: string
-  arguments?: PromptArgument[]
 }
 
 export interface PromptData {
