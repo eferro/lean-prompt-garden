@@ -28,7 +28,6 @@ export function usePrompts(): UsePromptsResult {
         setPrompts(data.prompts)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load prompts')
-        console.error('Error loading prompts:', err)
       } finally {
         setLoading(false)
       }

@@ -34,7 +34,6 @@ export function usePromptDetail(name: string): UsePromptDetailResult {
         setPrompt(promptDefinition)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load prompt')
-        console.error('Error loading prompt detail:', err)
       } finally {
         setLoading(false)
       }
