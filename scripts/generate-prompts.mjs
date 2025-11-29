@@ -52,15 +52,16 @@ async function readPromptDefinitions() {
 async function buildPromptData() {
   const definitions = await readPromptDefinitions();
 
-  const prompts = definitions.map(({ name, title, description }) => ({
+  const prompts = definitions.map(({ name, title, description, categories = [] }) => ({
     name,
     title,
     description,
+    categories,
   }));
 
   const definitionMap = definitions.reduce((acc, definition) => {
-    const { name, title, description, messages } = definition;
-    acc[name] = { name, title, description, messages };
+    const { name, title, description, categories = [], messages } = definition;
+    acc[name] = { name, title, description, categories, messages };
     return acc;
   }, {});
 

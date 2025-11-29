@@ -18,17 +18,15 @@ export interface PromptMessage {
   content: PromptContent
 }
 
-export interface PromptDefinition {
-  name: string
-  title: string
-  description: string
-  messages: PromptMessage[]
-}
-
 export interface Prompt {
   name: string
   title: string
   description: string
+  categories?: string[]
+}
+
+export interface PromptDefinition extends Prompt {
+  messages: PromptMessage[]
 }
 
 export interface PromptData {

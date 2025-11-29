@@ -1,6 +1,8 @@
 name: clarity_naming
 title: Clarity · Naming
 description: Improve naming and API clarity. Make code self-explanatory.
+categories:
+  - Clarity
 messages:
   - role: user
     content:

@@ -10,20 +10,30 @@ export class ValidationError extends Error {
   }
 }
 
-/**
- * Validates that a prompt object has all required fields
- */
-function isValidPrompt(prompt: unknown): prompt is Prompt {
+function assertValidPrompt(prompt: unknown, index: number): asserts prompt is Prompt {
   if (typeof prompt !== 'object' || prompt === null) {
-    return false
+    throw new ValidationError(`Invalid prompt at index ${index}: missing required field`)
   }
-  
-  const p = prompt as Record<string, unknown>
-  return (
-    typeof p.name === 'string' &&
-    typeof p.title === 'string' &&
-    typeof p.description === 'string'
-  )
+
+  const p = prompt as Prompt & { categories?: unknown }
+
+  if (
+    typeof p.name !== 'string' ||
+    typeof p.title !== 'string' ||
+    typeof p.description !== 'string'
+  ) {
+    throw new ValidationError(`Invalid prompt at index ${index}: missing required field`)
+  }
+
+  if (p.categories === undefined) {
+    return
+  }
+
+  if (!Array.isArray(p.categories) || !p.categories.every((category) => typeof category === 'string')) {
+    throw new ValidationError(
+      `Invalid prompt at index ${index}: categories must be an array of strings`
+    )
+  }
 }
 
 /**
@@ -54,9 +64,7 @@ export function validatePromptData(data: unknown): PromptData {
 
   // Validate each prompt
   for (let i = 0; i < obj.prompts.length; i++) {
-    if (!isValidPrompt(obj.prompts[i])) {
-      throw new ValidationError(`Invalid prompt at index ${i}: missing required field`)
-    }
+    assertValidPrompt(obj.prompts[i], i)
   }
 
   return data as PromptData

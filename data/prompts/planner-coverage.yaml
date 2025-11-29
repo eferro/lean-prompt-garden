@@ -1,6 +1,8 @@
 name: planner_coverage
 title: Planner · Test Coverage
 description: Plan and write tests for untested code. Behavior-focused.
+categories:
+  - Planner
 messages:
   - role: user
     content:

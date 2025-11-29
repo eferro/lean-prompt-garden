@@ -3,57 +3,90 @@
     {
       "name": "analyst_debt",
       "title": "Analyst · Technical Debt",
-      "description": "Identify and prioritize technical debt by ROI."
+      "description": "Identify and prioritize technical debt by ROI.",
+      "categories": [
+        "Analyst"
+      ]
     },
     {
       "name": "analyst_review",
       "title": "Analyst · Code Review",
-      "description": "XP-style review of pending changes. Tests, maintainability, project rules."
+      "description": "XP-style review of pending changes. Tests, maintainability, project rules.",
+      "categories": [
+        "Analyst"
+      ]
     },
     {
       "name": "analyst_risks",
       "title": "Analyst · Predict Risks",
-      "description": "Predict where code is likely to fail in production."
+      "description": "Predict where code is likely to fail in production.",
+      "categories": [
+        "Analyst"
+      ]
     },
     {
       "name": "analyst_security",
       "title": "Analyst · Security",
-      "description": "Pragmatic security analysis. Real risks, simple mitigations."
+      "description": "Pragmatic security analysis. Real risks, simple mitigations.",
+      "categories": [
+        "Analyst"
+      ]
     },
     {
       "name": "clarity_naming",
       "title": "Clarity · Naming",
-      "description": "Improve naming and API clarity. Make code self-explanatory."
+      "description": "Improve naming and API clarity. Make code self-explanatory.",
+      "categories": [
+        "Clarity"
+      ]
     },
     {
       "name": "gardener_prune",
       "title": "Gardener · Prune",
-      "description": "Remove dead code and small duplications with evidence."
+      "description": "Remove dead code and small duplications with evidence.",
+      "categories": [
+        "Gardener"
+      ]
     },
     {
       "name": "gardener_refactor",
       "title": "Gardener · Refactor",
-      "description": "Small, safe, behavior-preserving micro-refactors. Scout rule."
+      "description": "Small, safe, behavior-preserving micro-refactors. Scout rule.",
+      "categories": [
+        "Gardener"
+      ]
     },
     {
       "name": "gardener_simplify",
       "title": "Gardener · Simplify",
-      "description": "Reduce complexity via small extractions. Keep behavior constant."
+      "description": "Reduce complexity via small extractions. Keep behavior constant.",
+      "categories": [
+        "Gardener"
+      ]
     },
     {
       "name": "gardener_upgrade",
       "title": "Gardener · Upgrade",
-      "description": "Safe dependency upgrades. One at a time. Full test cycle."
+      "description": "Safe dependency upgrades. One at a time. Full test cycle.",
+      "categories": [
+        "Gardener"
+      ]
     },
     {
       "name": "planner_coverage",
       "title": "Planner · Test Coverage",
-      "description": "Plan and write tests for untested code. Behavior-focused."
+      "description": "Plan and write tests for untested code. Behavior-focused.",
+      "categories": [
+        "Planner"
+      ]
     },
     {
       "name": "planner_mikado",
       "title": "Planner · Mikado Method",
-      "description": "Break complex changes into safe, incremental steps."
+      "description": "Break complex changes into safe, incremental steps.",
+      "categories": [
+        "Planner"
+      ]
     }
   ],
   "definitions": {
@@ -61,6 +94,9 @@
       "name": "analyst_debt",
       "title": "Analyst · Technical Debt",
       "description": "Identify and prioritize technical debt by ROI.",
+      "categories": [
+        "Analyst"
+      ],
       "messages": [
         {
           "role": "user",
@@ -75,6 +111,9 @@
       "name": "analyst_review",
       "title": "Analyst · Code Review",
       "description": "XP-style review of pending changes. Tests, maintainability, project rules.",
+      "categories": [
+        "Analyst"
+      ],
       "messages": [
         {
           "role": "user",
@@ -89,6 +128,9 @@
       "name": "analyst_risks",
       "title": "Analyst · Predict Risks",
       "description": "Predict where code is likely to fail in production.",
+      "categories": [
+        "Analyst"
+      ],
       "messages": [
         {
           "role": "user",
@@ -103,6 +145,9 @@
       "name": "analyst_security",
       "title": "Analyst · Security",
       "description": "Pragmatic security analysis. Real risks, simple mitigations.",
+      "categories": [
+        "Analyst"
+      ],
       "messages": [
         {
           "role": "user",
@@ -117,6 +162,9 @@
       "name": "clarity_naming",
       "title": "Clarity · Naming",
       "description": "Improve naming and API clarity. Make code self-explanatory.",
+      "categories": [
+        "Clarity"
+      ],
       "messages": [
         {
           "role": "user",
@@ -131,6 +179,9 @@
       "name": "gardener_prune",
       "title": "Gardener · Prune",
       "description": "Remove dead code and small duplications with evidence.",
+      "categories": [
+        "Gardener"
+      ],
       "messages": [
         {
           "role": "user",
@@ -145,6 +196,9 @@
       "name": "gardener_refactor",
       "title": "Gardener · Refactor",
       "description": "Small, safe, behavior-preserving micro-refactors. Scout rule.",
+      "categories": [
+        "Gardener"
+      ],
       "messages": [
         {
           "role": "user",
@@ -159,6 +213,9 @@
       "name": "gardener_simplify",
       "title": "Gardener · Simplify",
       "description": "Reduce complexity via small extractions. Keep behavior constant.",
+      "categories": [
+        "Gardener"
+      ],
       "messages": [
         {
           "role": "user",
@@ -173,6 +230,9 @@
       "name": "gardener_upgrade",
       "title": "Gardener · Upgrade",
       "description": "Safe dependency upgrades. One at a time. Full test cycle.",
+      "categories": [
+        "Gardener"
+      ],
       "messages": [
         {
           "role": "user",
@@ -187,6 +247,9 @@
       "name": "planner_coverage",
       "title": "Planner · Test Coverage",
       "description": "Plan and write tests for untested code. Behavior-focused.",
+      "categories": [
+        "Planner"
+      ],
       "messages": [
         {
           "role": "user",
@@ -201,6 +264,9 @@
       "name": "planner_mikado",
       "title": "Planner · Mikado Method",
       "description": "Break complex changes into safe, incremental steps.",
+      "categories": [
+        "Planner"
+      ],
       "messages": [
         {
           "role": "user",

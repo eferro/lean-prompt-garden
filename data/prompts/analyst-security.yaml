@@ -1,6 +1,8 @@
 name: analyst_security
 title: Analyst · Security
 description: Pragmatic security analysis. Real risks, simple mitigations.
+categories:
+  - Analyst
 messages:
   - role: user
     content:

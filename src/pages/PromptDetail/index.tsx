@@ -130,10 +130,18 @@ export default function PromptDetail() {
           </p>
         </div>
 
-        <div className="flex items-center text-sm text-gray-500">
+        <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
           <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded-md text-xs font-medium">
             {prompt.name}
           </span>
+          {prompt.categories?.map((category) => (
+            <span
+              key={category}
+              className="px-2 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-medium"
+            >
+              {category}
+            </span>
+          ))}
         </div>
       </div>
 
